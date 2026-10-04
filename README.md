@@ -14,6 +14,7 @@ for training and from **deterministic manifests** for validation/test. Optuna tu
 records every run, every deployed model is exported to ONNX and checked against PyTorch, and a
 FastAPI + React/Tailwind app runs in Docker Compose.
 
+- **Demo video:** https://youtu.be/f5fjrYPDRv8 · **Trained models:** [release v1.0](https://github.com/Ali-prog-spec/Restoration-Sketch-studio/releases/tag/v1.0)
 - Requirements checklist: [REQUIREMENTS.md](REQUIREMENTS.md) · progress/status: [PROGRESS.md](PROGRESS.md)
 - Design decisions and evidence: [docs/research_notes.md](docs/research_notes.md) · references: [docs/references.bib](docs/references.bib)
 - Google Stitch instructions (manual step): [docs/STITCH_GUIDE.md](docs/STITCH_GUIDE.md) · AI use: [docs/AI_USE.md](docs/AI_USE.md)
