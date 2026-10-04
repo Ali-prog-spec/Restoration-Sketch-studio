@@ -10,7 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 COPY backend/requirements.txt /app/backend/requirements.txt
-RUN pip install --no-cache-dir -r /app/backend/requirements.txt
+RUN pip install --no-cache-dir --default-timeout=120 --retries 10 -r /app/backend/requirements.txt
 
 # Only the torch-free shared code is needed: corruption definitions + image preprocessing.
 COPY src/__init__.py /app/src/__init__.py
