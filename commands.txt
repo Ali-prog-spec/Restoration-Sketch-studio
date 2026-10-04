@@ -1,0 +1,130 @@
+=====================================================================
+ GenAI Assignment 1 - command cheat sheet
+ Project folder: C:\Users\KENKINIKI\Desktop\New folder (2)
+ Commands are given for GIT BASH (the VS Code terminal you use).
+ PowerShell differences are shown where needed.
+=====================================================================
+
+---------------------------------------------------------------------
+0. ALWAYS FIRST: go to the project folder
+---------------------------------------------------------------------
+cd "/c/Users/KENKINIKI/Desktop/New folder (2)"
+    (PowerShell:  cd "C:\Users\KENKINIKI\Desktop\New folder (2)")
+
+
+---------------------------------------------------------------------
+1. RUN THE APP (development mode, no Docker) - needs 2 terminals
+---------------------------------------------------------------------
+# Terminal 1 - backend (FastAPI + ONNX models from ./models)
+cd "/c/Users/KENKINIKI/Desktop/New folder (2)"
+.venv/Scripts/python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+
+# Terminal 2 - website (React)
+cd "/c/Users/KENKINIKI/Desktop/New folder (2)/frontend"
+npm run dev -- --host 127.0.0.1
+
+# Open in the browser:
+#   http://127.0.0.1:5173            <- the app (4 workspaces + System status)
+#   http://127.0.0.1:8000/docs       <- backend API documentation
+#   http://127.0.0.1:8000/health     <- backend health / which models are loaded
+# Stop a server: Ctrl + C in its terminal.
+# Note: http://127.0.0.1:8000 on its own is the backend, NOT the website.
+
+# Screenshot helper: add ?autorun to run a sample automatically, e.g.
+#   http://127.0.0.1:5173/?autorun#soft
+
+
+---------------------------------------------------------------------
+2. RUN THE APP WITH DOCKER (what the evaluator does)
+---------------------------------------------------------------------
+# requires Docker Desktop to be installed and running
+cd "/c/Users/KENKINIKI/Desktop/New folder (2)"
+docker compose up --build
+#   open http://localhost:8080        (API: http://localhost:8000/docs)
+docker compose down                   # stop
+
+
+---------------------------------------------------------------------
+3. CHECK TRAINING PROGRESS (Task 4 pipeline running in background)
+---------------------------------------------------------------------
+# LIVE PROGRESS BAR (refreshes every 20 s, says "TRAINING COMPLETE" at the end;
+# Ctrl+C only closes the bar, the training keeps running):
+.venv/Scripts/python scripts/training_progress.py
+.venv/Scripts/python scripts/training_progress.py --once      # print once
+
+# raw logs:
+cat outputs/logs/final_pipeline_driver_part2.log            # which stage is running
+tail -5 outputs/logs/final/task4_0_optimize_task4.log       # Optuna trials (Task 4)
+grep -c "finished with" outputs/logs/final/task4_0_optimize_task4.log   # trials done (of 20)
+tail -3 outputs/logs/final/task4_1_train_task4.log          # final 200-epoch training
+nvidia-smi                                                  # GPU usage
+
+# If the pipeline was interrupted, resume it (Optuna continues where it stopped):
+.venv/Scripts/python scripts/run_pipeline.py --mode final --stages task4 export report
+
+
+---------------------------------------------------------------------
+4. EXPERIMENT TRACKING (MLflow) - for the report and the demo video
+---------------------------------------------------------------------
+.venv/Scripts/mlflow ui --backend-store-uri sqlite:///mlflow.db
+#   open http://127.0.0.1:5000
+
+
+---------------------------------------------------------------------
+5. TESTS
+---------------------------------------------------------------------
+.venv/Scripts/python -m pytest                                 # all unit + API tests
+.venv/Scripts/python scripts/run_pipeline.py --mode smoke      # quick end-to-end check (~5 min)
+
+
+---------------------------------------------------------------------
+6. FULL EXPERIMENT PIPELINE (reproduce everything - many hours)
+---------------------------------------------------------------------
+.venv/Scripts/python scripts/run_pipeline.py --mode final
+# single stages: --stages task1 | task2 | task3 | task4 | export | report
+
+# Individual steps (examples, Task 1):
+.venv/Scripts/python scripts/optimize_task1.py --mode final
+.venv/Scripts/python scripts/train_task1.py --mode final --use-best
+.venv/Scripts/python scripts/evaluate_task1.py --mode final
+# same pattern for: optimize_task2_classifier / train_task2_classifier,
+#   optimize_task2_specialists / train_task2_specialists, evaluate_task2,
+#   optimize_task3 / train_task3 / evaluate_task3,
+#   optimize_task4 / train_task4 / evaluate_task4 --split test
+
+
+---------------------------------------------------------------------
+7. ONNX EXPORT + REPORT FILES
+---------------------------------------------------------------------
+.venv/Scripts/python scripts/export_onnx.py --mode final           # -> models/*.onnx (+ validation)
+cat outputs/onnx/validation_report.md                              # PyTorch vs ONNX check
+.venv/Scripts/python scripts/make_report_artifacts.py --mode final # -> report/figures, report/tables
+
+
+---------------------------------------------------------------------
+8. DATA PREPARATION (only needed on a new machine - see data/README.md)
+---------------------------------------------------------------------
+.venv/Scripts/python scripts/fetch_oxford_mirror.py
+.venv/Scripts/python scripts/prepare_oxford.py
+.venv/Scripts/python scripts/generate_manifests.py      # ONCE (fixed val/test corruptions)
+.venv/Scripts/python scripts/prepare_fs2k.py
+
+
+---------------------------------------------------------------------
+9. RELEASE THE MODELS (after training, for GitHub Releases)
+---------------------------------------------------------------------
+.venv/Scripts/python scripts/package_models.py          # -> dist/models.zip
+# then on GitHub: Releases -> new release v1.0 -> attach dist/models.zip
+# evaluator downloads them with:  sh scripts/download_models.sh
+
+
+---------------------------------------------------------------------
+10. TROUBLESHOOTING
+---------------------------------------------------------------------
+"npm error Missing script: dev"  -> you are not in the frontend folder: cd frontend
+{"detail":"Not Found"}           -> you opened the backend (port 8000); open port 5173
+Sidebar says "Backend offline"   -> backend terminal (section 1, terminal 1) is not running
+Task 4 says model missing        -> training not finished yet / run scripts/export_onnx.py
+Port already in use              -> an old server is still running; close its window or
+                                    PowerShell: Get-Process python,node | Stop-Process
+                                    (careful: this also stops a running training!)

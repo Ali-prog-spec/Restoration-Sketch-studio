@@ -1,0 +1,13 @@
+[I 2026-09-23 20:54:53,996] A new study created in RDB with name: task4_smoke_smoke
+[optuna] study task4_smoke_smoke: 0 finished trials, running 2 more
+[GAN] epoch 1/1 D_real=0.894 D_fake=0.847 G_adv=1.096 G_L1=0.6728 | val L1=0.2859 SSIM=0.1188 PSNR=9.97 (0.7s)
+[I 2026-09-23 20:54:59,188] Trial 0 finished with value: 0.5835648663341999 and parameters: {'lr_g': 0.0002, 'lr_d': 0.0002, 'batch_size': 4, 'base_channels': 64, 'dropout': 0.5, 'style_dim': 16, 'lambda_l1': 100.0}. Best is trial 0 with value: 0.5835648663341999.
+[GAN] epoch 1/1 D_real=0.883 D_fake=0.738 G_adv=1.178 G_L1=0.6495 | val L1=0.3142 SSIM=0.1104 PSNR=9.41 (0.2s)
+[I 2026-09-23 20:55:00,030] Trial 1 finished with value: 0.6019357480108738 and parameters: {'lr_g': 0.00011844319751820385, 'lr_d': 0.0004463590152176814, 'batch_size': 4, 'base_channels': 32, 'dropout': 0.07799726016810132, 'style_dim': 8, 'lambda_l1': 10.636066512540282}. Best is trial 0 with value: 0.5835648663341999.
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:125: ExperimentalWarning: optuna.visualization.matplotlib._optimization_history.plot_optimization_history is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_optimization_history(study)
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:132: ExperimentalWarning: optuna.visualization.matplotlib._param_importances.plot_param_importances is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_param_importances(study)
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:138: ExperimentalWarning: optuna.visualization.matplotlib._intermediate_values.plot_intermediate_values is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_intermediate_values(study)
+[optuna] best value 0.5835648663341999 params {'lr_g': 0.0002, 'lr_d': 0.0002, 'batch_size': 4, 'base_channels': 64, 'dropout': 0.5, 'style_dim': 16, 'lambda_l1': 100.0}

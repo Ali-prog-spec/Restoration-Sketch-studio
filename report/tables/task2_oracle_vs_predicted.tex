@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Task 2 hard routing on the test manifest: oracle vs. predicted routing.}
+\label{tab:task2_routing}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & oracle\_psnr & pred\_psnr & oracle\_ssim & pred\_ssim & input\_ssim & cls\_accuracy \\
+\midrule
+clean / none & 100.00 & 99.37 & 1.0000 & 0.9987 & 1.0000 & 0.9916 \\
+salt\_pepper / low & 25.31 & 25.31 & 0.8269 & 0.8269 & 0.6025 & 1.0000 \\
+salt\_pepper / medium & 25.29 & 25.29 & 0.8242 & 0.8242 & 0.3397 & 1.0000 \\
+salt\_pepper / high & 25.24 & 25.24 & 0.8185 & 0.8185 & 0.2041 & 1.0000 \\
+blur / low & 25.59 & 25.74 & 0.8254 & 0.8294 & 0.9436 & 0.9741 \\
+blur / medium & 25.75 & 25.75 & 0.8187 & 0.8187 & 0.8057 & 1.0000 \\
+blur / high & 24.62 & 24.62 & 0.7463 & 0.7463 & 0.6916 & 1.0000 \\
+occlusion / low & 22.70 & 22.76 & 0.7742 & 0.7765 & 0.8619 & 0.9779 \\
+occlusion / medium & 21.32 & 21.32 & 0.7283 & 0.7283 & 0.7301 & 0.9981 \\
+occlusion / high & 19.54 & 19.54 & 0.6556 & 0.6556 & 0.5458 & 1.0000 \\
+\bottomrule
+\end{tabular}
+\end{table}

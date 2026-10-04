@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Task 3 soft MoE test results.}
+\label{tab:task3_level}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & l1 & psnr & ssim & input\_psnr & input\_ssim & n \\
+\midrule
+clean / none & 0.0025 & 49.53 & 0.9984 & 100.00 & 1.0000 & 3669 \\
+salt\_pepper / low & 0.0334 & 26.69 & 0.8489 & 20.13 & 0.6025 & 3669 \\
+salt\_pepper / medium & 0.0366 & 26.13 & 0.8373 & 15.88 & 0.3397 & 3669 \\
+salt\_pepper / high & 0.0373 & 25.96 & 0.8295 & 13.14 & 0.2041 & 3669 \\
+blur / low & 0.0220 & 29.93 & 0.9129 & 32.34 & 0.9436 & 3669 \\
+blur / medium & 0.0303 & 27.38 & 0.8430 & 26.77 & 0.8057 & 3669 \\
+blur / high & 0.0365 & 25.65 & 0.7613 & 24.35 & 0.6916 & 3669 \\
+occlusion / low & 0.0333 & 23.12 & 0.8763 & 16.69 & 0.8619 & 3669 \\
+occlusion / medium & 0.0458 & 21.70 & 0.7925 & 13.36 & 0.7301 & 3669 \\
+occlusion / high & 0.0635 & 19.58 & 0.6838 & 10.79 & 0.5458 & 3669 \\
+\bottomrule
+\end{tabular}
+\end{table}

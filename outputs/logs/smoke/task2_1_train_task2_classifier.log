@@ -1,0 +1,2 @@
+[CLS] epoch 1/1 loss=1.1072 acc=0.4583 val_acc=0.2500 val_F1=0.1000 (0.6s)
+best validation: {'ce': 1.4104329347610474, 'accuracy': 0.25, 'macro_f1': 0.1, 'objective': 0.9, 'epoch': 1}

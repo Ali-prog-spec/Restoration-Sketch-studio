@@ -1,0 +1,9 @@
+[I 2026-10-03 18:23:47,578] Using an existing study with `study_name='task3_soft_moe_final'` instead of creating a new one.
+[optuna] study task3_soft_moe_final: 20 finished trials, running 0 more
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:129: ExperimentalWarning: optuna.visualization.matplotlib._optimization_history.plot_optimization_history is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_optimization_history(study)
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:136: ExperimentalWarning: optuna.visualization.matplotlib._param_importances.plot_param_importances is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_param_importances(study)
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:142: ExperimentalWarning: optuna.visualization.matplotlib._intermediate_values.plot_intermediate_values is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_intermediate_values(study)
+[optuna] best value 0.08171311925853726 params {'lr_joint': 1.3528965487197334e-05, 'tau': 2.0770443259648013, 'ce_weight': 0.010388515794784236, 'balance_weight': 0.00018626833104855403, 'recon_l1': 0.5009323562711249, 'balance': 'squared'}

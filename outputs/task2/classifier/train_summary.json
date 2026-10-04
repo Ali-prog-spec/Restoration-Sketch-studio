@@ -1,0 +1,159 @@
+{
+  "best": {
+    "ce": 0.026110224425792694,
+    "accuracy": 0.993546187877655,
+    "macro_f1": 0.9935491052516116,
+    "objective": 0.006450894748388447,
+    "epoch": 7
+  },
+  "config": {
+    "seed": 42,
+    "device": "auto",
+    "progress": true,
+    "data": {
+      "num_workers": 4,
+      "limit_data": null
+    },
+    "model": {
+      "base_channels": 16,
+      "channel_mults": [
+        1,
+        2,
+        4
+      ],
+      "dropout": 0.1810582585265165,
+      "num_classes": 4
+    },
+    "train": {
+      "epochs": 40,
+      "batch_size": 32,
+      "lr": 0.0003754948960496151,
+      "weight_decay": 0.0016377089208453601,
+      "amp": true,
+      "scheduler": "cosine",
+      "early_stopping_patience": 10
+    },
+    "optuna": {
+      "study_name": "task2_classifier",
+      "storage": "sqlite:///optuna_studies/task2_classifier.db",
+      "n_trials": 25,
+      "epochs": 10,
+      "pruner": "median",
+      "pruner_startup_trials": 4,
+      "pruner_warmup_steps": 3,
+      "seed": 42,
+      "search_space": {
+        "lr": {
+          "type": "float",
+          "low": 0.0001,
+          "high": 0.003,
+          "log": true,
+          "target": "train.lr"
+        },
+        "batch_size": {
+          "type": "categorical",
+          "choices": [
+            32,
+            64,
+            128
+          ],
+          "target": "train.batch_size"
+        },
+        "base_channels": {
+          "type": "categorical",
+          "choices": [
+            16,
+            32,
+            48
+          ],
+          "target": "model.base_channels"
+        },
+        "channel_plan": {
+          "type": "categorical",
+          "choices": [
+            "shallow",
+            "standard",
+            "wide_top"
+          ],
+          "target": "model.channel_mults",
+          "map": {
+            "shallow": [
+              1,
+              2,
+              4
+            ],
+            "standard": [
+              1,
+              2,
+              4,
+              8
+            ],
+            "wide_top": [
+              1,
+              2,
+              4,
+              8,
+              8
+            ]
+          }
+        },
+        "dropout": {
+          "type": "float",
+          "low": 0.0,
+          "high": 0.5,
+          "target": "model.dropout"
+        },
+        "weight_decay": {
+          "type": "float",
+          "low": 1e-06,
+          "high": 0.01,
+          "log": true,
+          "target": "train.weight_decay"
+        }
+      }
+    },
+    "tracking": {
+      "enabled": true,
+      "experiment": "task2-classifier"
+    },
+    "output": {
+      "checkpoint": "checkpoints/task2/classifier.pt",
+      "dir": "outputs/task2/classifier",
+      "optuna_dir": "outputs/task2/classifier/optuna"
+    },
+    "mode": "final",
+    "config_path": "configs\\task2_classifier.yaml"
+  },
+  "optuna_best_params": {
+    "lr": 0.0003754948960496151,
+    "batch_size": 32,
+    "base_channels": 16,
+    "channel_plan": "shallow",
+    "dropout": 0.1810582585265165,
+    "weight_decay": 0.0016377089208453601
+  },
+  "checkpoint": "checkpoints/task2/classifier.pt",
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "packages": {
+      "torch": "2.14.0+cu126",
+      "torchvision": "0.29.0+cu126",
+      "numpy": "2.4.6",
+      "optuna": "5.0.0",
+      "mlflow": "3.16.1",
+      "onnx": "1.23.0",
+      "onnxruntime": "1.30.0",
+      "scikit-learn": "1.9.1",
+      "scikit-image": "0.26.0",
+      "pillow": "12.3.0",
+      "fastapi": "0.141.1"
+    },
+    "cuda_available": true,
+    "cuda_version": "12.6",
+    "cudnn_version": 91002,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_memory_gb": 6.0
+  }
+}

@@ -1,0 +1,15 @@
+# Build context for the backend image is the repo root: keep it small.
+.venv
+data
+checkpoints
+outputs
+mlruns
+mlartifacts
+mlflow.db
+optuna_studies
+models
+report
+frontend/node_modules
+frontend/dist
+**/__pycache__
+.git

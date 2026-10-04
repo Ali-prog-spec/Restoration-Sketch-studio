@@ -1,0 +1,225 @@
+{
+  "best": {
+    "l1": 0.028096578326886116,
+    "ssim": 0.8684741232706152,
+    "psnr": 31.45885873877484,
+    "ce": 0.2571677620644155,
+    "acc": 0.8980978260869565,
+    "entropy": 0.4994233231181684,
+    "objective": 0.07981122752813544,
+    "epoch": 18,
+    "stage": "joint",
+    "collapse": {
+      "collapsed": false,
+      "inactive": [],
+      "dominating": [],
+      "usage": [
+        0.4299837417961301,
+        0.24944491099576344,
+        0.14093220743139367,
+        0.17963913954293315
+      ]
+    },
+    "mean_weights": [
+      [
+        0.9196446214033209,
+        0.008747039555126557,
+        0.02719328641567541,
+        0.04441505877058143
+      ],
+      [
+        0.025016439633200997,
+        0.9677676532579504,
+        0.0008652090036775917,
+        0.00635068999785606
+      ],
+      [
+        0.403535848726397,
+        0.01917963750336481,
+        0.5338832664748897,
+        0.043401247781255974
+      ],
+      [
+        0.3717380574216013,
+        0.00208531366661191,
+        0.001787067831331945,
+        0.6243895616220392
+      ]
+    ]
+  },
+  "initial": {
+    "l1": 0.034887570968788605,
+    "ssim": 0.8422045889108077,
+    "psnr": 29.853955434716266,
+    "ce": 0.02611022412210055,
+    "acc": 0.993546195652174,
+    "entropy": 0.29822162214828574,
+    "objective": 0.09634149102899044,
+    "mean_weights": [
+      [
+        0.884138146172399,
+        0.029180664609631767,
+        0.05365366727599631,
+        0.03302752785384655
+      ],
+      [
+        0.010013051579058494,
+        0.9750451225301494,
+        0.004059147707227132,
+        0.010882681600101616
+      ],
+      [
+        0.10711288597920667,
+        0.029144052537563053,
+        0.8433334257291711,
+        0.020409647739775803
+      ],
+      [
+        0.015691027627326548,
+        0.006355085389931564,
+        0.0010903181821998694,
+        0.9768635734267856
+      ]
+    ],
+    "branch_usage": [
+      0.2542387778394977,
+      0.25993123126681894,
+      0.2255341397236486,
+      0.2602958576551274
+    ]
+  },
+  "config": {
+    "seed": 42,
+    "device": "auto",
+    "progress": true,
+    "data": {
+      "num_workers": 4,
+      "limit_data": null
+    },
+    "init": {
+      "classifier_checkpoint": "checkpoints/task2/classifier.pt",
+      "specialist_dir": "checkpoints/task2"
+    },
+    "model": {
+      "tau": 2.0770443259648013
+    },
+    "loss": {
+      "l1": 0.5009323562711249,
+      "ssim": 0.49906764372887513,
+      "ce": 0.010388515794784236,
+      "balance_weight": 0.00018626833104855403,
+      "balance": "entropy"
+    },
+    "train": {
+      "batch_size": 32,
+      "warmup_epochs": 3,
+      "joint_epochs": 15,
+      "lr_gate": 0.0001,
+      "lr_joint": 1.3528965487197334e-05,
+      "amp": true,
+      "freeze_expert_bn": true,
+      "early_stopping_patience": 6,
+      "inactive_threshold": 0.05,
+      "dominance_threshold": 0.6
+    },
+    "optuna": {
+      "study_name": "task3_soft_moe",
+      "storage": "sqlite:///optuna_studies/task3.db",
+      "n_trials": 20,
+      "epochs": 0,
+      "trial_warmup_epochs": 1,
+      "trial_joint_epochs": 4,
+      "pruner": "median",
+      "pruner_startup_trials": 4,
+      "pruner_warmup_steps": 2,
+      "seed": 42,
+      "search_space": {
+        "lr_joint": {
+          "type": "float",
+          "low": 1e-06,
+          "high": 5e-05,
+          "log": true,
+          "target": "train.lr_joint"
+        },
+        "tau": {
+          "type": "float",
+          "low": 0.5,
+          "high": 3.0,
+          "target": "model.tau"
+        },
+        "ce_weight": {
+          "type": "float",
+          "low": 0.01,
+          "high": 0.5,
+          "log": true,
+          "target": "loss.ce"
+        },
+        "balance_weight": {
+          "type": "float",
+          "low": 0.0001,
+          "high": 0.1,
+          "log": true,
+          "target": "loss.balance_weight"
+        },
+        "recon_l1": {
+          "type": "float",
+          "low": 0.5,
+          "high": 0.95,
+          "target": "loss.l1",
+          "complement_target": "loss.ssim"
+        },
+        "balance": {
+          "type": "categorical",
+          "choices": [
+            "squared",
+            "entropy"
+          ],
+          "target": "loss.balance"
+        }
+      }
+    },
+    "tracking": {
+      "enabled": true,
+      "experiment": "task3-soft-moe"
+    },
+    "output": {
+      "checkpoint": "checkpoints/task3/soft_moe.pt",
+      "dir": "outputs/task3",
+      "optuna_dir": "outputs/task3/optuna"
+    },
+    "mode": "final",
+    "config_path": "configs\\task3.yaml"
+  },
+  "optuna_best_params": {
+    "lr_joint": 1.3528965487197334e-05,
+    "tau": 2.0770443259648013,
+    "ce_weight": 0.010388515794784236,
+    "balance_weight": 0.00018626833104855403,
+    "recon_l1": 0.5009323562711249,
+    "balance": "squared"
+  },
+  "checkpoint": "checkpoints/task3/soft_moe_balance_ablation.pt",
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "packages": {
+      "torch": "2.14.0+cu126",
+      "torchvision": "0.29.0+cu126",
+      "numpy": "2.4.6",
+      "optuna": "5.0.0",
+      "mlflow": "3.16.1",
+      "onnx": "1.23.0",
+      "onnxruntime": "1.30.0",
+      "scikit-learn": "1.9.1",
+      "scikit-image": "0.26.0",
+      "pillow": "12.3.0",
+      "fastapi": "0.141.1"
+    },
+    "cuda_available": true,
+    "cuda_version": "12.6",
+    "cudnn_version": 91002,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_memory_gb": 6.0
+  }
+}

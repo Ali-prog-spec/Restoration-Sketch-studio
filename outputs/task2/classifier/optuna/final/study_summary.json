@@ -1,0 +1,120 @@
+{
+  "study_name": "task2_classifier_final",
+  "direction": "MINIMIZE",
+  "n_trials_total": 25,
+  "trial_states": {
+    "PRUNED": 20,
+    "COMPLETE": 5
+  },
+  "search_space": {
+    "lr": {
+      "type": "float",
+      "low": 0.0001,
+      "high": 0.003,
+      "log": true,
+      "target": "train.lr"
+    },
+    "batch_size": {
+      "type": "categorical",
+      "choices": [
+        32,
+        64,
+        128
+      ],
+      "target": "train.batch_size"
+    },
+    "base_channels": {
+      "type": "categorical",
+      "choices": [
+        16,
+        32,
+        48
+      ],
+      "target": "model.base_channels"
+    },
+    "channel_plan": {
+      "type": "categorical",
+      "choices": [
+        "shallow",
+        "standard",
+        "wide_top"
+      ],
+      "target": "model.channel_mults",
+      "map": {
+        "shallow": [
+          1,
+          2,
+          4
+        ],
+        "standard": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "wide_top": [
+          1,
+          2,
+          4,
+          8,
+          8
+        ]
+      }
+    },
+    "dropout": {
+      "type": "float",
+      "low": 0.0,
+      "high": 0.5,
+      "target": "model.dropout"
+    },
+    "weight_decay": {
+      "type": "float",
+      "low": 1e-06,
+      "high": 0.01,
+      "log": true,
+      "target": "train.weight_decay"
+    }
+  },
+  "mode": "final",
+  "trial_epochs": 10,
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "packages": {
+      "torch": "2.14.0+cu126",
+      "torchvision": "0.29.0+cu126",
+      "numpy": "2.4.6",
+      "optuna": "5.0.0",
+      "mlflow": "3.16.1",
+      "onnx": "1.23.0",
+      "onnxruntime": "1.30.0",
+      "scikit-learn": "1.9.1",
+      "scikit-image": "0.26.0",
+      "pillow": "12.3.0",
+      "fastapi": "0.141.1"
+    },
+    "cuda_available": true,
+    "cuda_version": "12.6",
+    "cudnn_version": 91002,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_memory_gb": 6.0
+  },
+  "best_trial_number": 22,
+  "best_value": 0.005435033442809378,
+  "best_params": {
+    "lr": 0.0003754948960496151,
+    "batch_size": 32,
+    "base_channels": 16,
+    "channel_plan": "shallow",
+    "dropout": 0.1810582585265165,
+    "weight_decay": 0.0016377089208453601
+  },
+  "best_user_attrs": {
+    "best_epoch": 7,
+    "duration_s": 58.1,
+    "val_accuracy": 0.9945651888847351,
+    "val_ce": 0.024319948628544807,
+    "val_macro_f1": 0.9945649665571906
+  }
+}

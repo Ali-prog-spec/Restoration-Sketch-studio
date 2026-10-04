@@ -1,0 +1,11 @@
+split,type,level,n,coverage_mean,coverage_min,coverage_max,prob_mean,sigma_mean
+test,blur,high,3669,,,,,2.5
+test,blur,low,3669,,,,,0.6999999999999998
+test,blur,medium,3669,,,,,1.5
+test,clean,none,3669,,,,,
+test,occlusion,high,3669,0.34546400825539997,0.33502197265625,0.35418701171875,,
+test,occlusion,low,3669,0.10001883788796334,0.09869384765625,0.1015625,,
+test,occlusion,medium,3669,0.19831851055720223,0.18511962890625,0.2030029296875,,
+test,salt_pepper,high,3669,,,,0.14999999999999997,
+test,salt_pepper,low,3669,,,,0.03000000000000001,
+test,salt_pepper,medium,3669,,,,0.08,

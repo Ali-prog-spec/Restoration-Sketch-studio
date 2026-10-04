@@ -1,0 +1,75 @@
+# Task 3 — jointly trained soft mixture-of-experts
+base:
+  seed: 42
+  device: auto
+  progress: true
+  data:
+    num_workers: 4
+    limit_data: null
+  init:                                   # NOT random: Task 2 weights (PDF p.6)
+    classifier_checkpoint: checkpoints/task2/classifier.pt
+    specialist_dir: checkpoints/task2
+  model:
+    tau: 1.0
+  loss:                                   # PDF starting values
+    l1: 0.8
+    ssim: 0.2
+    ce: 0.1
+    balance_weight: 0.01
+    balance: squared                      # squared (PDF baseline) | entropy (alternative)
+  train:
+    batch_size: 32                        # multiple of 4 -> balanced batches
+    warmup_epochs: 3                      # stage 1: experts frozen, gate trained
+    joint_epochs: 15                      # stage 2: everything fine-tuned
+    lr_gate: 1.0e-4
+    lr_joint: 1.0e-5                      # smaller than lr_gate and the specialists' lr
+    amp: true
+    freeze_expert_bn: true
+    early_stopping_patience: 6
+    inactive_threshold: 0.05              # max mean weight of a branch over all classes below this -> inactive
+    dominance_threshold: 0.6              # a branch taking > 60% weight on an unrelated class -> dominance
+  optuna:
+    study_name: task3_soft_moe
+    storage: sqlite:///optuna_studies/task3.db
+    n_trials: 20
+    epochs: 0                             # unused (trial length set by trial_warmup/trial_joint)
+    trial_warmup_epochs: 1
+    trial_joint_epochs: 4
+    pruner: median
+    pruner_startup_trials: 4
+    pruner_warmup_steps: 2
+    seed: 42
+    search_space:
+      lr_joint:       {type: float, low: 1.0e-6, high: 5.0e-5, log: true, target: train.lr_joint}
+      tau:            {type: float, low: 0.5, high: 3.0, target: model.tau}
+      ce_weight:      {type: float, low: 0.01, high: 0.5, log: true, target: loss.ce}
+      balance_weight: {type: float, low: 1.0e-4, high: 0.1, log: true, target: loss.balance_weight}
+      recon_l1:       {type: float, low: 0.5, high: 0.95, target: loss.l1, complement_target: loss.ssim}
+      balance:        {type: categorical, choices: [squared, entropy], target: loss.balance}
+  tracking:
+    enabled: true
+    experiment: task3-soft-moe
+  output:
+    checkpoint: checkpoints/task3/soft_moe.pt
+    dir: outputs/task3
+    optuna_dir: outputs/task3/optuna
+
+modes:
+  smoke:
+    progress: false
+    data: {limit_data: 48, num_workers: 0}
+    init: {classifier_checkpoint: checkpoints/smoke/classifier.pt, specialist_dir: checkpoints/smoke/task2}
+    train: {batch_size: 16, warmup_epochs: 1, joint_epochs: 1}
+    optuna: {n_trials: 2, trial_warmup_epochs: 1, trial_joint_epochs: 1, study_name: task3_smoke,
+             storage: sqlite:///optuna_studies/smoke.db}
+    tracking: {experiment: smoke-tests}
+    output:
+      checkpoint: checkpoints/smoke/soft_moe.pt
+      dir: outputs/smoke/task3
+      optuna_dir: outputs/smoke/task3/optuna
+  dev:
+    train: {warmup_epochs: 2, joint_epochs: 6}
+    optuna: {n_trials: 8, trial_warmup_epochs: 1, trial_joint_epochs: 2}
+  final:
+    train: {warmup_epochs: 3, joint_epochs: 15}
+    optuna: {n_trials: 20, trial_warmup_epochs: 1, trial_joint_epochs: 4}

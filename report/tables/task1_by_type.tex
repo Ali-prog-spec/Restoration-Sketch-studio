@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Task 1 test results per condition (input\_* = corrupted input vs. clean target).}
+\label{tab:task1_type}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & l1 & psnr & ssim & input\_psnr & input\_ssim & n \\
+\midrule
+clean & 0.0328 & 26.70 & 0.8310 & 100.00 & 1.0000 & 3669 \\
+salt\_pepper & 0.0331 & 26.60 & 0.8246 & 16.38 & 0.3821 & 11007 \\
+blur & 0.0343 & 26.29 & 0.7976 & 27.82 & 0.8136 & 11007 \\
+occlusion & 0.0507 & 21.71 & 0.7220 & 13.61 & 0.7126 & 11007 \\
+overall & 0.0387 & 25.05 & 0.7864 & 27.35 & 0.6725 & 36690 \\
+\bottomrule
+\end{tabular}
+\end{table}

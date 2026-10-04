@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Task 2 specialists (shared) Optuna study \texttt{task2\_specialists\_shared\_final}: 20 trials (complete 11, pruned 9); 10 epochs per trial; best objective 0.1743 (trial 16).}
+\label{tab:optuna_task2_spec}
+\small
+\begin{tabular}{llll}
+\toprule
+Parameter & Type & Search range & Best \\
+\midrule
+lr & float & [0.0001, 0.003] (log) & 0.002024 \\
+batch\_size & categorical & \{16, 32, 64\} & 32 \\
+bottleneck & categorical & \{8x8x16, 8x8x32, 8x8x64, 16x16x8, 16x16x16\} & 16x16x16 \\
+base\_channels & categorical & \{16, 32, 48\} & 32 \\
+alpha & float & [0.5, 0.95] & 0.5205 \\
+\bottomrule
+\end{tabular}
+\end{table}

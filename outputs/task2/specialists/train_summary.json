@@ -1,0 +1,214 @@
+{
+  "specialists": {
+    "salt_pepper": {
+      "best": {
+        "l1": 0.040383477897747704,
+        "ssim": 0.8244439104328984,
+        "psnr": 25.567829132080078,
+        "objective": 0.10796978373242463,
+        "loss": 0.1051995522173335,
+        "epoch": 56
+      },
+      "checkpoint": "checkpoints/task2/salt_pepper_expert.pt"
+    },
+    "blur": {
+      "best": {
+        "l1": 0.038237241299256035,
+        "ssim": 0.8170636892318726,
+        "psnr": 25.855038103849992,
+        "objective": 0.11058677603369174,
+        "loss": 0.10762130900973907,
+        "epoch": 49
+      },
+      "checkpoint": "checkpoints/task2/blur_expert.pt"
+    },
+    "occlusion": {
+      "best": {
+        "l1": 0.05951311601244885,
+        "ssim": 0.7147882088370945,
+        "psnr": 21.118396261463996,
+        "objective": 0.17236245358767718,
+        "loss": 0.16773697824104775,
+        "epoch": 56
+      },
+      "checkpoint": "checkpoints/task2/occlusion_expert.pt"
+    }
+  },
+  "config": {
+    "seed": 42,
+    "device": "auto",
+    "progress": true,
+    "specialists": [
+      "salt_pepper",
+      "blur",
+      "occlusion"
+    ],
+    "data": {
+      "num_workers": 4,
+      "limit_data": null
+    },
+    "model": {
+      "base_channels": 32,
+      "channel_mults": [
+        1,
+        2,
+        4
+      ],
+      "latent_channels": 16,
+      "dropout": 0.1,
+      "skip_levels": [],
+      "skip_channels": 4
+    },
+    "loss": {
+      "alpha": 0.5204940296771613
+    },
+    "train": {
+      "epochs": 60,
+      "batch_size": 32,
+      "lr": 0.0020243011511883132,
+      "weight_decay": 0.0,
+      "amp": true,
+      "scheduler": "cosine",
+      "early_stopping_patience": 15
+    },
+    "optuna": {
+      "study_name": "task2_specialists_shared",
+      "storage": "sqlite:///optuna_studies/task2_specialists.db",
+      "n_trials": 20,
+      "epochs": 10,
+      "pruner": "median",
+      "pruner_startup_trials": 4,
+      "pruner_warmup_steps": 3,
+      "seed": 42,
+      "search_space": {
+        "lr": {
+          "type": "float",
+          "low": 0.0001,
+          "high": 0.003,
+          "log": true,
+          "target": "train.lr"
+        },
+        "batch_size": {
+          "type": "categorical",
+          "choices": [
+            16,
+            32,
+            64
+          ],
+          "target": "train.batch_size"
+        },
+        "bottleneck": {
+          "type": "categorical",
+          "choices": [
+            "8x8x16",
+            "8x8x32",
+            "8x8x64",
+            "16x16x8",
+            "16x16x16"
+          ],
+          "map": {
+            "8x8x16": {
+              "model.channel_mults": [
+                1,
+                2,
+                4,
+                8
+              ],
+              "model.latent_channels": 16
+            },
+            "8x8x32": {
+              "model.channel_mults": [
+                1,
+                2,
+                4,
+                8
+              ],
+              "model.latent_channels": 32
+            },
+            "8x8x64": {
+              "model.channel_mults": [
+                1,
+                2,
+                4,
+                8
+              ],
+              "model.latent_channels": 64
+            },
+            "16x16x8": {
+              "model.channel_mults": [
+                1,
+                2,
+                4
+              ],
+              "model.latent_channels": 8
+            },
+            "16x16x16": {
+              "model.channel_mults": [
+                1,
+                2,
+                4
+              ],
+              "model.latent_channels": 16
+            }
+          }
+        },
+        "base_channels": {
+          "type": "categorical",
+          "choices": [
+            16,
+            32,
+            48
+          ],
+          "target": "model.base_channels"
+        },
+        "alpha": {
+          "type": "float",
+          "low": 0.5,
+          "high": 0.95,
+          "target": "loss.alpha"
+        }
+      }
+    },
+    "tracking": {
+      "enabled": true,
+      "experiment": "task2-specialists"
+    },
+    "output": {
+      "checkpoint_dir": "checkpoints/task2",
+      "dir": "outputs/task2/specialists",
+      "optuna_dir": "outputs/task2/specialists/optuna"
+    },
+    "mode": "final",
+    "config_path": "configs\\task2_specialists.yaml"
+  },
+  "optuna_best_params": {
+    "lr": 0.0020243011511883132,
+    "batch_size": 32,
+    "bottleneck": "16x16x16",
+    "base_channels": 32,
+    "alpha": 0.5204940296771613
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "packages": {
+      "torch": "2.14.0+cu126",
+      "torchvision": "0.29.0+cu126",
+      "numpy": "2.4.6",
+      "optuna": "5.0.0",
+      "mlflow": "3.16.1",
+      "onnx": "1.23.0",
+      "onnxruntime": "1.30.0",
+      "scikit-learn": "1.9.1",
+      "scikit-image": "0.26.0",
+      "pillow": "12.3.0",
+      "fastapi": "0.141.1"
+    },
+    "cuda_available": true,
+    "cuda_version": "12.6",
+    "cudnn_version": 91002,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_memory_gb": 6.0
+  }
+}

@@ -1,0 +1,13 @@
+[I 2026-09-23 20:59:01,643] A new study created in RDB with name: task1_smoke_smoke
+[optuna] study task1_smoke_smoke: 0 finished trials, running 2 more
+[T1-trial0] epoch 1/1 train_loss=0.3228 val_L1=0.2294 val_SSIM=0.3085 val_PSNR=11.90 J=0.4604 (1.0s)
+[I 2026-09-23 20:59:06,883] Trial 0 finished with value: 0.4604254563649495 and parameters: {'lr': 0.001, 'batch_size': 16, 'bottleneck': '8x8x16', 'base_channels': 32, 'dropout': 0.1, 'alpha': 0.8}. Best is trial 0 with value: 0.4604254563649495.
+[T1-trial1] epoch 1/1 train_loss=0.4590 val_L1=0.2295 val_SSIM=0.3085 val_PSNR=11.90 J=0.4605 (0.2s)
+[I 2026-09-23 20:59:07,603] Trial 1 finished with value: 0.46048605442047114 and parameters: {'lr': 0.0003574712922600243, 'batch_size': 16, 'bottleneck': '8x8x16', 'base_channels': 32, 'dropout': 0.21242177333881365, 'alpha': 0.5092630224331111}. Best is trial 0 with value: 0.4604254563649495.
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:129: ExperimentalWarning: optuna.visualization.matplotlib._optimization_history.plot_optimization_history is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_optimization_history(study)
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:136: ExperimentalWarning: optuna.visualization.matplotlib._param_importances.plot_param_importances is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_param_importances(study)
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:142: ExperimentalWarning: optuna.visualization.matplotlib._intermediate_values.plot_intermediate_values is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_intermediate_values(study)
+[optuna] best value 0.4604254563649495 params {'lr': 0.001, 'batch_size': 16, 'bottleneck': '8x8x16', 'base_channels': 32, 'dropout': 0.1, 'alpha': 0.8}

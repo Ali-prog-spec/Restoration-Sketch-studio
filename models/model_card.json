@@ -1,0 +1,186 @@
+{
+  "models": {
+    "task1": {
+      "file": "task1_universal_dae.onnx",
+      "sha256": "191257add60c5834f422c45cf3912d076c1c0d3e9bde09438b672bed236f7fb1",
+      "inputs": [
+        {
+          "name": "input",
+          "shape": [
+            "batch",
+            3,
+            128,
+            128
+          ],
+          "type": "tensor(float)"
+        }
+      ],
+      "outputs": [
+        "restored"
+      ],
+      "exporter": "dynamo",
+      "opset": 18
+    },
+    "task2_classifier": {
+      "file": "task2_classifier.onnx",
+      "sha256": "2594916de705b7b769b6fc07b4bce8956f4e373b1e0156f4fc3cc74247bf8f65",
+      "inputs": [
+        {
+          "name": "input",
+          "shape": [
+            "batch",
+            3,
+            128,
+            128
+          ],
+          "type": "tensor(float)"
+        }
+      ],
+      "outputs": [
+        "logits"
+      ],
+      "exporter": "dynamo",
+      "opset": 18
+    },
+    "task2_salt_pepper": {
+      "file": "task2_salt_expert.onnx",
+      "sha256": "d0dc860196e7764e684ce2004dbb14e9c85cb45f4273b13dc282e8e916975092",
+      "inputs": [
+        {
+          "name": "input",
+          "shape": [
+            "batch",
+            3,
+            128,
+            128
+          ],
+          "type": "tensor(float)"
+        }
+      ],
+      "outputs": [
+        "restored"
+      ],
+      "exporter": "dynamo",
+      "opset": 18
+    },
+    "task2_blur": {
+      "file": "task2_blur_expert.onnx",
+      "sha256": "d58542bbcd425e38976c6f56f55e9fd82407e629c3d933ec638c57e31e19a65e",
+      "inputs": [
+        {
+          "name": "input",
+          "shape": [
+            "batch",
+            3,
+            128,
+            128
+          ],
+          "type": "tensor(float)"
+        }
+      ],
+      "outputs": [
+        "restored"
+      ],
+      "exporter": "dynamo",
+      "opset": 18
+    },
+    "task2_occlusion": {
+      "file": "task2_occlusion_expert.onnx",
+      "sha256": "29415cbd856e51335b65c80f86668931734b89a484e6e48edcde64896b9027f2",
+      "inputs": [
+        {
+          "name": "input",
+          "shape": [
+            "batch",
+            3,
+            128,
+            128
+          ],
+          "type": "tensor(float)"
+        }
+      ],
+      "outputs": [
+        "restored"
+      ],
+      "exporter": "dynamo",
+      "opset": 18
+    },
+    "task3": {
+      "file": "task3_soft_moe.onnx",
+      "sha256": "653a648f97f174e02a06529dec06d2b0c77b4a0b04fbe502443f2205ca515b09",
+      "inputs": [
+        {
+          "name": "input",
+          "shape": [
+            "batch",
+            3,
+            128,
+            128
+          ],
+          "type": "tensor(float)"
+        }
+      ],
+      "outputs": [
+        "restored",
+        "weights"
+      ],
+      "exporter": "dynamo",
+      "opset": 18
+    },
+    "task4": {
+      "file": "task4_generator.onnx",
+      "sha256": "2002a821d6001c8960572425ec299630364bf56b15ab73c35bd264dd2c32c81f",
+      "inputs": [
+        {
+          "name": "photo",
+          "shape": [
+            "batch",
+            3,
+            128,
+            128
+          ],
+          "type": "tensor(float)"
+        },
+        {
+          "name": "style",
+          "shape": [
+            "batch"
+          ],
+          "type": "tensor(int64)"
+        }
+      ],
+      "outputs": [
+        "sketch"
+      ],
+      "exporter": "dynamo",
+      "opset": 18
+    }
+  },
+  "image_size": 128,
+  "class_names": [
+    "clean",
+    "salt_pepper",
+    "blur",
+    "occlusion"
+  ],
+  "style_names": [
+    "Style 1",
+    "Style 2",
+    "Style 3"
+  ],
+  "restoration_input": "float32 RGB in [0,1], NCHW",
+  "sketch_input": "float32 RGB in [-1,1], NCHW; style int64 in {0,1,2}",
+  "sketch_output": "float32 in [-1,1]",
+  "mode": "final",
+  "task3_tau": 2.0770442485809326,
+  "task4_generator_config": {
+    "in_channels": 3,
+    "out_channels": 1,
+    "base_channels": 64,
+    "num_styles": 3,
+    "style_dim": 16,
+    "dropout": 0.1171964990526542,
+    "norm": "instance",
+    "image_size": 128
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "study_name": "task1_universal_dae_final",
+  "direction": "MINIMIZE",
+  "n_trials_total": 30,
+  "trial_states": {
+    "COMPLETE": 20,
+    "PRUNED": 10
+  },
+  "search_space": {
+    "lr": {
+      "type": "float",
+      "low": 0.0001,
+      "high": 0.003,
+      "log": true,
+      "target": "train.lr"
+    },
+    "batch_size": {
+      "type": "categorical",
+      "choices": [
+        16,
+        32,
+        64
+      ],
+      "target": "train.batch_size"
+    },
+    "bottleneck": {
+      "type": "categorical",
+      "choices": [
+        "8x8x16",
+        "8x8x32",
+        "8x8x64",
+        "16x16x8",
+        "16x16x16"
+      ],
+      "map": {
+        "8x8x16": {
+          "model.channel_mults": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "model.latent_channels": 16
+        },
+        "8x8x32": {
+          "model.channel_mults": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "model.latent_channels": 32
+        },
+        "8x8x64": {
+          "model.channel_mults": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "model.latent_channels": 64
+        },
+        "16x16x8": {
+          "model.channel_mults": [
+            1,
+            2,
+            4
+          ],
+          "model.latent_channels": 8
+        },
+        "16x16x16": {
+          "model.channel_mults": [
+            1,
+            2,
+            4
+          ],
+          "model.latent_channels": 16
+        }
+      }
+    },
+    "base_channels": {
+      "type": "categorical",
+      "choices": [
+        16,
+        32,
+        48
+      ],
+      "target": "model.base_channels"
+    },
+    "dropout": {
+      "type": "float",
+      "low": 0.0,
+      "high": 0.3,
+      "target": "model.dropout"
+    },
+    "alpha": {
+      "type": "float",
+      "low": 0.5,
+      "high": 0.95,
+      "target": "loss.alpha"
+    }
+  },
+  "mode": "final",
+  "trial_epochs": 15,
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "packages": {
+      "torch": "2.14.0+cu126",
+      "torchvision": "0.29.0+cu126",
+      "numpy": "2.4.6",
+      "optuna": "5.0.0",
+      "mlflow": "3.16.1",
+      "onnx": "1.23.0",
+      "onnxruntime": "1.30.0",
+      "scikit-learn": "1.9.1",
+      "scikit-image": "0.26.0",
+      "pillow": "12.3.0",
+      "fastapi": "0.141.1"
+    },
+    "cuda_available": true,
+    "cuda_version": "12.6",
+    "cudnn_version": 91002,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_memory_gb": 6.0
+  },
+  "best_trial_number": 29,
+  "best_value": 0.14452707882889584,
+  "best_params": {
+    "lr": 0.001912089184823488,
+    "batch_size": 16,
+    "bottleneck": "16x16x8",
+    "base_channels": 48,
+    "dropout": 0.006019299454785406,
+    "alpha": 0.530585277197807
+  },
+  "best_user_attrs": {
+    "best_epoch": 15,
+    "bottleneck_dim": 2048,
+    "duration_s": 217.3,
+    "val_l1": 0.04579613102680963,
+    "val_psnr": 24.004167971403703,
+    "val_ssim": 0.7567419733690179
+  }
+}

@@ -1,0 +1,7 @@
+# Inference-only dependencies (no PyTorch: the backend runs ONNX Runtime on CPU).
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+python-multipart==0.0.32
+onnxruntime==1.30.0
+numpy==2.4.6
+pillow==12.3.0

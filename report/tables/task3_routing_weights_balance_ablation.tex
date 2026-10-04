@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Average soft-MoE routing weight per true condition and severity (test).}
+\label{tab:task3_routing_balance_ablation}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Condition & Identity & Salt expert & Blur expert & Occlusion expert \\
+\midrule
+clean / none & 0.922 & 0.009 & 0.025 & 0.045 \\
+salt\_pepper / low & 0.081 & 0.901 & 0.001 & 0.017 \\
+salt\_pepper / medium & 0.013 & 0.982 & 0.001 & 0.004 \\
+salt\_pepper / high & 0.011 & 0.986 & 0.001 & 0.003 \\
+blur / low & 0.556 & 0.019 & 0.376 & 0.049 \\
+blur / medium & 0.330 & 0.019 & 0.611 & 0.040 \\
+blur / high & 0.295 & 0.020 & 0.644 & 0.041 \\
+occlusion / low & 0.526 & 0.002 & 0.003 & 0.469 \\
+occlusion / medium & 0.389 & 0.002 & 0.002 & 0.607 \\
+occlusion / high & 0.259 & 0.002 & 0.001 & 0.738 \\
+\bottomrule
+\end{tabular}
+\end{table}

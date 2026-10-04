@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* Design tokens taken from the Google Stitch design (report/stitch/*.png):
+   indigo brand colour, white rounded cards on a cool-grey canvas, Inter for text and a
+   monospace face for labels, metrics and technical tags. Fonts fall back to system
+   fonts when Google Fonts is unreachable (offline Docker hosts). */
+@theme {
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #3f37c9;
+  --color-brand-800: #3730a3;
+  --color-canvas: #f6f7fb;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+.pixel-view {
+  image-rendering: auto;
+}
+
+/* small uppercase monospace label used throughout the Stitch design */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-slate-500);
+}

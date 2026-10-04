@@ -1,0 +1,16 @@
+{
+  "mirror": "https://huggingface.co/datasets/timm/oxford-iiit-pet",
+  "split_ids": {
+    "train_equals_trainval_txt": true,
+    "test_equals_test_txt": true,
+    "n_trainval_txt": 3680,
+    "n_test_txt": 3669,
+    "n_mirror_train": 3680,
+    "n_mirror_test": 3669
+  },
+  "official_archive": "data/raw/oxford_pets/official_images_partial.tar.gz",
+  "bytes_compared": 1145,
+  "bytes_identical": 1145,
+  "bytes_mismatched": [],
+  "verified": true
+}

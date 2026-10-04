@@ -1,0 +1,17 @@
+[I 2026-09-23 21:00:25,643] A new study created in RDB with name: task2_specialists_smoke_smoke
+[optuna] study task2_specialists_smoke_smoke: 0 finished trials, running 2 more
+[T2-salt_pepper-trial0] epoch 1/1 train_loss=0.3259 val_L1=0.2291 val_SSIM=0.3085 val_PSNR=11.91 J=0.4603 (1.1s)
+[T2-blur-trial0] epoch 1/1 train_loss=0.3177 val_L1=0.2286 val_SSIM=0.3086 val_PSNR=11.93 J=0.4600 (0.2s)
+[T2-occlusion-trial0] epoch 1/1 train_loss=0.3187 val_L1=0.2286 val_SSIM=0.3086 val_PSNR=11.93 J=0.4600 (0.1s)
+[I 2026-09-23 21:00:31,442] Trial 0 finished with value: 0.46009688907199436 and parameters: {'lr': 0.001, 'batch_size': 16, 'bottleneck': '8x8x16', 'base_channels': 32, 'alpha': 0.8}. Best is trial 0 with value: 0.46009688907199436.
+[T2-salt_pepper-trial1] epoch 1/1 train_loss=0.3157 val_L1=0.2293 val_SSIM=0.3085 val_PSNR=11.91 J=0.4604 (0.1s)
+[T2-blur-trial1] epoch 1/1 train_loss=0.3046 val_L1=0.2290 val_SSIM=0.3086 val_PSNR=11.92 J=0.4602 (0.1s)
+[T2-occlusion-trial1] epoch 1/1 train_loss=0.3087 val_L1=0.2290 val_SSIM=0.3086 val_PSNR=11.92 J=0.4602 (0.1s)
+[I 2026-09-23 21:00:32,603] Trial 1 finished with value: 0.460279901822408 and parameters: {'lr': 0.0003574712922600243, 'batch_size': 16, 'bottleneck': '8x8x16', 'base_channels': 32, 'alpha': 0.8186326600082204}. Best is trial 0 with value: 0.46009688907199436.
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:129: ExperimentalWarning: optuna.visualization.matplotlib._optimization_history.plot_optimization_history is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_optimization_history(study)
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:136: ExperimentalWarning: optuna.visualization.matplotlib._param_importances.plot_param_importances is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_param_importances(study)
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:142: ExperimentalWarning: optuna.visualization.matplotlib._intermediate_values.plot_intermediate_values is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_intermediate_values(study)
+[optuna] best value 0.46009688907199436 params {'lr': 0.001, 'batch_size': 16, 'bottleneck': '8x8x16', 'base_channels': 32, 'alpha': 0.8}

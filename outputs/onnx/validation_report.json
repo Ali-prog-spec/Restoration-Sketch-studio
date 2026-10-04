@@ -1,0 +1,355 @@
+{
+  "task1": {
+    "path": "C:\\Users\\KENKINIKI\\Desktop\\New folder (2)\\models\\task1_universal_dae.onnx",
+    "opset": 18,
+    "exporter": "dynamo",
+    "size_mb": 3.925,
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.001,
+    "batch_size": 20,
+    "outputs": [
+      {
+        "name": "restored",
+        "onnx_shape": [
+          20,
+          3,
+          128,
+          128
+        ],
+        "torch_shape": [
+          20,
+          3,
+          128,
+          128
+        ],
+        "shape_match": true,
+        "max_abs_diff": 2.8312206268310547e-06,
+        "mean_abs_diff": 9.697770764205416e-08,
+        "allclose": true
+      }
+    ],
+    "onnxruntime_ms_batch": 290.26,
+    "inputs": [
+      {
+        "name": "input",
+        "shape": [
+          "batch",
+          3,
+          128,
+          128
+        ],
+        "type": "tensor(float)"
+      }
+    ]
+  },
+  "task2_classifier": {
+    "path": "C:\\Users\\KENKINIKI\\Desktop\\New folder (2)\\models\\task2_classifier.onnx",
+    "opset": 18,
+    "exporter": "dynamo",
+    "size_mb": 0.304,
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.001,
+    "batch_size": 20,
+    "outputs": [
+      {
+        "name": "logits",
+        "onnx_shape": [
+          20,
+          4
+        ],
+        "torch_shape": [
+          20,
+          4
+        ],
+        "shape_match": true,
+        "max_abs_diff": 3.814697265625e-06,
+        "mean_abs_diff": 7.639638965883933e-07,
+        "allclose": true
+      }
+    ],
+    "onnxruntime_ms_batch": 35.25,
+    "inputs": [
+      {
+        "name": "input",
+        "shape": [
+          "batch",
+          3,
+          128,
+          128
+        ],
+        "type": "tensor(float)"
+      }
+    ]
+  },
+  "task2_salt_pepper": {
+    "path": "C:\\Users\\KENKINIKI\\Desktop\\New folder (2)\\models\\task2_salt_expert.onnx",
+    "opset": 18,
+    "exporter": "dynamo",
+    "size_mb": 1.831,
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.001,
+    "batch_size": 20,
+    "outputs": [
+      {
+        "name": "restored",
+        "onnx_shape": [
+          20,
+          3,
+          128,
+          128
+        ],
+        "torch_shape": [
+          20,
+          3,
+          128,
+          128
+        ],
+        "shape_match": true,
+        "max_abs_diff": 2.9206275939941406e-06,
+        "mean_abs_diff": 1.0616995638201843e-07,
+        "allclose": true
+      }
+    ],
+    "onnxruntime_ms_batch": 139.42,
+    "inputs": [
+      {
+        "name": "input",
+        "shape": [
+          "batch",
+          3,
+          128,
+          128
+        ],
+        "type": "tensor(float)"
+      }
+    ]
+  },
+  "task2_blur": {
+    "path": "C:\\Users\\KENKINIKI\\Desktop\\New folder (2)\\models\\task2_blur_expert.onnx",
+    "opset": 18,
+    "exporter": "dynamo",
+    "size_mb": 1.831,
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.001,
+    "batch_size": 20,
+    "outputs": [
+      {
+        "name": "restored",
+        "onnx_shape": [
+          20,
+          3,
+          128,
+          128
+        ],
+        "torch_shape": [
+          20,
+          3,
+          128,
+          128
+        ],
+        "shape_match": true,
+        "max_abs_diff": 3.4570693969726562e-06,
+        "mean_abs_diff": 1.26831324109844e-07,
+        "allclose": true
+      }
+    ],
+    "onnxruntime_ms_batch": 138.37,
+    "inputs": [
+      {
+        "name": "input",
+        "shape": [
+          "batch",
+          3,
+          128,
+          128
+        ],
+        "type": "tensor(float)"
+      }
+    ]
+  },
+  "task2_occlusion": {
+    "path": "C:\\Users\\KENKINIKI\\Desktop\\New folder (2)\\models\\task2_occlusion_expert.onnx",
+    "opset": 18,
+    "exporter": "dynamo",
+    "size_mb": 1.831,
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.001,
+    "batch_size": 20,
+    "outputs": [
+      {
+        "name": "restored",
+        "onnx_shape": [
+          20,
+          3,
+          128,
+          128
+        ],
+        "torch_shape": [
+          20,
+          3,
+          128,
+          128
+        ],
+        "shape_match": true,
+        "max_abs_diff": 7.569789886474609e-06,
+        "mean_abs_diff": 1.8862088779769692e-07,
+        "allclose": true
+      }
+    ],
+    "onnxruntime_ms_batch": 139.43,
+    "inputs": [
+      {
+        "name": "input",
+        "shape": [
+          "batch",
+          3,
+          128,
+          128
+        ],
+        "type": "tensor(float)"
+      }
+    ]
+  },
+  "task3": {
+    "path": "C:\\Users\\KENKINIKI\\Desktop\\New folder (2)\\models\\task3_soft_moe.onnx",
+    "opset": 18,
+    "exporter": "dynamo",
+    "size_mb": 5.878,
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.001,
+    "batch_size": 20,
+    "outputs": [
+      {
+        "name": "restored",
+        "onnx_shape": [
+          20,
+          3,
+          128,
+          128
+        ],
+        "torch_shape": [
+          20,
+          3,
+          128,
+          128
+        ],
+        "shape_match": true,
+        "max_abs_diff": 3.159046173095703e-06,
+        "mean_abs_diff": 1.0387355331431536e-07,
+        "allclose": true
+      },
+      {
+        "name": "weights",
+        "onnx_shape": [
+          20,
+          4
+        ],
+        "torch_shape": [
+          20,
+          4
+        ],
+        "shape_match": true,
+        "max_abs_diff": 2.086162567138672e-07,
+        "mean_abs_diff": 3.353197897126847e-08,
+        "allclose": true
+      }
+    ],
+    "onnxruntime_ms_batch": 444.72,
+    "inputs": [
+      {
+        "name": "input",
+        "shape": [
+          "batch",
+          3,
+          128,
+          128
+        ],
+        "type": "tensor(float)"
+      }
+    ]
+  },
+  "task4": {
+    "path": "C:\\Users\\KENKINIKI\\Desktop\\New folder (2)\\models\\task4_generator.onnx",
+    "opset": 18,
+    "exporter": "dynamo",
+    "size_mb": 160.192,
+    "passed": true,
+    "atol": 0.0001,
+    "rtol": 0.001,
+    "batch_size": 9,
+    "outputs": [
+      {
+        "name": "sketch",
+        "onnx_shape": [
+          9,
+          1,
+          128,
+          128
+        ],
+        "torch_shape": [
+          9,
+          1,
+          128,
+          128
+        ],
+        "shape_match": true,
+        "max_abs_diff": 8.07642936706543e-06,
+        "mean_abs_diff": 3.0673129458591575e-07,
+        "allclose": true
+      }
+    ],
+    "onnxruntime_ms_batch": 190.86,
+    "inputs": [
+      {
+        "name": "photo",
+        "shape": [
+          "batch",
+          3,
+          128,
+          128
+        ],
+        "type": "tensor(float)"
+      },
+      {
+        "name": "style",
+        "shape": [
+          "batch"
+        ],
+        "type": "tensor(int64)"
+      }
+    ]
+  },
+  "summary": {
+    "all_passed": true,
+    "n_models": 7,
+    "environment": {
+      "python": "3.11.9",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+      "packages": {
+        "torch": "2.14.0+cu126",
+        "torchvision": "0.29.0+cu126",
+        "numpy": "2.4.6",
+        "optuna": "5.0.0",
+        "mlflow": "3.16.1",
+        "onnx": "1.23.0",
+        "onnxruntime": "1.30.0",
+        "scikit-learn": "1.9.1",
+        "scikit-image": "0.26.0",
+        "pillow": "12.3.0",
+        "fastapi": "0.141.1"
+      },
+      "cuda_available": true,
+      "cuda_version": "12.6",
+      "cudnn_version": 91002,
+      "gpu": "NVIDIA GeForce RTX 2060",
+      "gpu_memory_gb": 6.0
+    }
+  }
+}

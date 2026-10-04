@@ -1,0 +1,35 @@
+# Training / evaluation / export environment (tested with Python 3.11.9 on Windows 11, RTX 2060).
+# PyTorch with CUDA: install torch/torchvision from the PyTorch index first, e.g.
+#   pip install torch==2.14.0 torchvision==0.29.0 --index-url https://download.pytorch.org/whl/cu126
+# (CPU-only also works, just slowly:  --index-url https://download.pytorch.org/whl/cpu)
+torch==2.14.0
+torchvision==0.29.0
+numpy==2.4.6
+scipy==1.17.1
+pandas==3.0.6
+pyarrow==25.0.1
+pillow==12.3.0
+PyYAML==6.0.3
+tqdm==4.70.1
+scikit-learn==1.9.1
+scikit-image==0.26.0
+matplotlib==3.11.2
+seaborn==0.13.2
+# hyper-parameter optimisation + experiment tracking
+optuna==5.0.0
+mlflow==3.16.1
+plotly==7.1.0
+# ONNX export / validation
+onnx==1.23.0
+onnxscript==0.7.2
+onnxruntime==1.30.0
+# backend (also listed in backend/requirements.txt for the container)
+fastapi==0.141.1
+uvicorn==0.53.0
+python-multipart==0.0.32
+# tests
+pytest==9.1.1
+httpx==0.28.1
+# optional: FS2K download from Google Drive, LPIPS metric
+gdown==6.4.0
+lpips==0.1.4

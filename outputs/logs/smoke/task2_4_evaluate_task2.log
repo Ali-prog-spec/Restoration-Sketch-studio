@@ -1,0 +1,13 @@
+predicted routing:   0%|          | 0/4 [00:00<?, ?it/s]predicted routing:  25%|██▌       | 1/4 [00:00<00:02,  1.38it/s]predicted routing:  50%|█████     | 2/4 [00:00<00:00,  2.24it/s]predicted routing:  75%|███████▌  | 3/4 [00:01<00:00,  2.72it/s]predicted routing: 100%|██████████| 4/4 [00:01<00:00,  3.35it/s]                                                                oracle routing:   0%|          | 0/4 [00:00<?, ?it/s]oracle routing:  25%|██▌       | 1/4 [00:00<00:00,  4.24it/s]oracle routing:  50%|█████     | 2/4 [00:00<00:00,  4.28it/s]oracle routing:  75%|███████▌  | 3/4 [00:00<00:00,  4.33it/s]oracle routing: 100%|██████████| 4/4 [00:00<00:00,  4.74it/s]                                                             {'classifier': {'accuracy': 0.3, 'macro_precision': 0.075, 'macro_recall': 0.25, 'macro_f1': 0.11538461538461539}, 'oracle_overall': {'l1': 0.21883883271366358, 'psnr': 20.256618704398473, 'ssim': 0.391086486261338, 'input_l1': 0.04594471280191404, 'input_psnr': 28.08124121427536, 'input_ssim': 0.672483263995188, 'ssim_gain': -0.28139677773384997, 'psnr_gain': -7.824622509876887, 'n': 480.0}, 'predicted_overall': {'l1': 0.24278043443337083, 'psnr': 11.408390059073765, 'ssim': 0.32356216153129935, 'input_l1': 0.04594471280191404, 'input_psnr': 28.08124121427536, 'input_ssim': 0.672483263995188, 'ssim_gain': -0.34892110246388863, 'psnr_gain': -16.672851155201595, 'n': 480.0}, 'n_misrouted': 336, 'n_classifier_caused_failures': 48, 'degradation_threshold': 0.01}
+                    oracle_psnr  pred_psnr  oracle_ssim  pred_ssim  input_ssim  cls_accuracy
+type        level                                                                           
+clean       none       100.0000    11.4084       1.0000     0.3236      1.0000           0.0
+salt_pepper low         11.3723    11.4084       0.3232     0.3236      0.5631           0.0
+            medium      11.3723    11.4084       0.3232     0.3236      0.2926           0.0
+            high        11.3723    11.4084       0.3232     0.3236      0.1684           0.0
+blur        low         11.4084    11.4084       0.3236     0.3236      0.9585           1.0
+            medium      11.4084    11.4084       0.3236     0.3236      0.8486           1.0
+            high        11.4084    11.4084       0.3236     0.3236      0.7493           1.0
+occlusion   low         11.4081    11.4084       0.3236     0.3236      0.8620           0.0
+            medium      11.4080    11.4084       0.3236     0.3236      0.7320           0.0
+            high        11.4080    11.4084       0.3236     0.3236      0.5504           0.0

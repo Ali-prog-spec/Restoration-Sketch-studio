@@ -1,0 +1,15 @@
+[I 2026-09-23 21:00:03,296] A new study created in RDB with name: task2_classifier_smoke_smoke
+[optuna] study task2_classifier_smoke_smoke: 0 finished trials, running 2 more
+[CLS] epoch 1/1 loss=1.1072 acc=0.4583 val_acc=0.2500 val_F1=0.1000 (0.6s)
+[I 2026-09-23 21:00:08,332] Trial 0 finished with value: 0.9 and parameters: {'lr': 0.001, 'batch_size': 16, 'base_channels': 32, 'channel_plan': 'standard', 'dropout': 0.3, 'weight_decay': 0.0001}. Best is trial 0 with value: 0.9.
+[CLS] epoch 1/1 loss=2.3967 acc=0.1667 val_acc=0.2500 val_F1=0.1000 (0.1s)
+[I 2026-09-23 21:00:08,986] Trial 1 finished with value: 0.9 and parameters: {'lr': 0.0003574712922600243, 'batch_size': 16, 'base_channels': 16, 'channel_plan': 'shallow', 'dropout': 0.4330880728874676, 'weight_decay': 0.00025378155082656634}. Best is trial 0 with value: 0.9.
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:129: ExperimentalWarning: optuna.visualization.matplotlib._optimization_history.plot_optimization_history is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_optimization_history(study)
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:136: ExperimentalWarning: optuna.visualization.matplotlib._param_importances.plot_param_importances is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_param_importances(study)
+C:\Users\KENKINIKI\Desktop\New folder (2)\.venv\Lib\site-packages\optuna\importance\_ped_anova\evaluator.py:298: UserWarning: Target and region quantiles select the same set of trials. Parameter importances will be equal.
+  optuna_warn(
+C:\Users\KENKINIKI\Desktop\New folder (2)\src\optimization\search.py:142: ExperimentalWarning: optuna.visualization.matplotlib._intermediate_values.plot_intermediate_values is experimental (supported from v2.2.0). The interface can change in the future.
+  ax = ovm.plot_intermediate_values(study)
+[optuna] best value 0.9 params {'lr': 0.001, 'batch_size': 16, 'base_channels': 32, 'channel_plan': 'standard', 'dropout': 0.3, 'weight_decay': 0.0001}

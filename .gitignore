@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Datasets (never commit; see data/README.md)
+data/raw/
+data/processed/
+
+# Large training artifacts (distributed via GitHub Releases; see models/README.md)
+checkpoints/**/*.pt
+models/*.onnx
+models/*.onnx.data
+
+# Experiment tracking: the run database (params/metrics) IS committed as evidence;
+# artifact copies (figures, checkpoints) are large and live in outputs/ and checkpoints/.
+mlruns/
+mlartifacts/
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+
+# LaTeX build files
+report/*.aux
+report/*.log
+report/*.out
+report/*.bbl
+report/*.blg
+report/*.synctex.gz
+report/*.fdb_latexmk
+report/*.fls
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Keep the small Optuna SQLite studies (required deliverable) — they are NOT ignored.
+
+# packaged release assets
+dist/
+models/models.zip
+
+# Large / regenerable experiment outputs (kept locally, regenerate with scripts/evaluate_*.py)
+outputs/smoke/
+outputs/smoke_report/
+outputs/dev_report/
+outputs/**/per_record*.csv
+outputs/task4/progress/epoch_*.png
+outputs/logs/*.err
+checkpoints/
+
+# Course material (not ours to redistribute)
+GenAI_Assignment#1.pdf
+outputs/**/*.pdf
+outputs/logs/*.log

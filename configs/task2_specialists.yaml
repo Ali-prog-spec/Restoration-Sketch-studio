@@ -1,0 +1,75 @@
+# Task 2 (part B) — three specialist denoising autoencoders (same architecture, independent parameters)
+base:
+  seed: 42
+  device: auto
+  progress: true
+  specialists: [salt_pepper, blur, occlusion]
+  data:
+    num_workers: 4
+    limit_data: null
+  model:
+    base_channels: 32
+    channel_mults: [1, 2, 4, 8]
+    latent_channels: 16
+    dropout: 0.1
+    skip_levels: []
+    skip_channels: 4
+  loss:
+    alpha: 0.8
+  train:
+    epochs: 50
+    batch_size: 32
+    lr: 1.0e-3
+    weight_decay: 0.0
+    amp: true
+    scheduler: cosine
+    early_stopping_patience: 12
+  optuna:
+    # SHARED search (allowed by the PDF, p.5): every trial trains all three specialists
+    # with the same hyperparameters; objective = mean validation J over the three.
+    study_name: task2_specialists_shared
+    storage: sqlite:///optuna_studies/task2_specialists.db
+    n_trials: 20
+    epochs: 10
+    pruner: median
+    pruner_startup_trials: 4
+    pruner_warmup_steps: 3
+    seed: 42
+    search_space:
+      lr:              {type: float, low: 1.0e-4, high: 3.0e-3, log: true, target: train.lr}
+      batch_size:      {type: categorical, choices: [16, 32, 64], target: train.batch_size}
+      bottleneck:      {type: categorical, choices: [8x8x16, 8x8x32, 8x8x64, 16x16x8, 16x16x16],
+                        # grid x grid x latent channels; every option compresses the 49,152-value input >= 12x
+                        map: {8x8x16:   {model.channel_mults: [1, 2, 4, 8], model.latent_channels: 16},
+                              8x8x32:   {model.channel_mults: [1, 2, 4, 8], model.latent_channels: 32},
+                              8x8x64:   {model.channel_mults: [1, 2, 4, 8], model.latent_channels: 64},
+                              16x16x8:  {model.channel_mults: [1, 2, 4],    model.latent_channels: 8},
+                              16x16x16: {model.channel_mults: [1, 2, 4],    model.latent_channels: 16}}}
+      base_channels:   {type: categorical, choices: [16, 32, 48], target: model.base_channels}
+      alpha:           {type: float, low: 0.5, high: 0.95, target: loss.alpha}
+  tracking:
+    enabled: true
+    experiment: task2-specialists
+  output:
+    checkpoint_dir: checkpoints/task2
+    dir: outputs/task2/specialists
+    optuna_dir: outputs/task2/specialists/optuna
+
+modes:
+  smoke:
+    progress: false
+    data: {limit_data: 48, num_workers: 0}
+    train: {epochs: 1, batch_size: 16}
+    optuna: {n_trials: 2, epochs: 1, study_name: task2_specialists_smoke, storage: sqlite:///optuna_studies/smoke.db,
+             search_space: {batch_size: {type: categorical, choices: [16], target: train.batch_size}}}
+    tracking: {experiment: smoke-tests}
+    output:
+      checkpoint_dir: checkpoints/smoke/task2
+      dir: outputs/smoke/task2/specialists
+      optuna_dir: outputs/smoke/task2/specialists/optuna
+  dev:
+    train: {epochs: 20}
+    optuna: {n_trials: 8, epochs: 6}
+  final:
+    train: {epochs: 60, early_stopping_patience: 15}
+    optuna: {n_trials: 20, epochs: 10}

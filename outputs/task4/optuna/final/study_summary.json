@@ -1,0 +1,113 @@
+{
+  "study_name": "task4_pix2pix_final",
+  "direction": "MINIMIZE",
+  "n_trials_total": 22,
+  "trial_states": {
+    "COMPLETE": 18,
+    "RUNNING": 2,
+    "PRUNED": 2
+  },
+  "search_space": {
+    "lr_g": {
+      "type": "float",
+      "low": 5e-05,
+      "high": 0.0005,
+      "log": true,
+      "target": "train.lr_g"
+    },
+    "lr_d": {
+      "type": "float",
+      "low": 5e-05,
+      "high": 0.0005,
+      "log": true,
+      "target": "train.lr_d"
+    },
+    "batch_size": {
+      "type": "categorical",
+      "choices": [
+        4,
+        8,
+        16
+      ],
+      "target": "train.batch_size"
+    },
+    "base_channels": {
+      "type": "categorical",
+      "choices": [
+        32,
+        48,
+        64
+      ],
+      "target": [
+        "model.g_channels",
+        "model.d_channels"
+      ]
+    },
+    "dropout": {
+      "type": "float",
+      "low": 0.0,
+      "high": 0.5,
+      "target": "model.dropout"
+    },
+    "style_dim": {
+      "type": "categorical",
+      "choices": [
+        4,
+        8,
+        16,
+        32
+      ],
+      "target": "model.style_dim"
+    },
+    "lambda_l1": {
+      "type": "float",
+      "low": 10.0,
+      "high": 200.0,
+      "log": true,
+      "target": "loss.lambda_l1"
+    }
+  },
+  "mode": "final",
+  "trial_epochs": 25,
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "packages": {
+      "torch": "2.14.0+cu126",
+      "torchvision": "0.29.0+cu126",
+      "numpy": "2.4.6",
+      "optuna": "5.0.0",
+      "mlflow": "3.16.1",
+      "onnx": "1.23.0",
+      "onnxruntime": "1.30.0",
+      "scikit-learn": "1.9.1",
+      "scikit-image": "0.26.0",
+      "pillow": "12.3.0",
+      "fastapi": "0.141.1"
+    },
+    "cuda_available": true,
+    "cuda_version": "12.6",
+    "cudnn_version": 91002,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_memory_gb": 6.0
+  },
+  "best_trial_number": 19,
+  "best_value": 0.31332278176673556,
+  "best_params": {
+    "lr_g": 0.0004520364418179576,
+    "lr_d": 7.378339531328186e-05,
+    "batch_size": 8,
+    "base_channels": 64,
+    "dropout": 0.1171964990526542,
+    "style_dim": 16,
+    "lambda_l1": 148.69618634878626
+  },
+  "best_user_attrs": {
+    "best_epoch": 24,
+    "duration_s": 420.2,
+    "val_l1": 0.1007249115398095,
+    "val_psnr": 15.610418355689859,
+    "val_ssim": 0.47407934800633844
+  }
+}

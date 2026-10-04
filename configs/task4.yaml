@@ -1,0 +1,74 @@
+# Task 4 — style-conditioned face-to-sketch pix2pix (FS2K)
+base:
+  seed: 42
+  device: auto
+  progress: true
+  fixed_per_style: 3                # fixed validation photos per style for progress grids
+  data:
+    num_workers: 4
+    limit_data: null
+    augment:                        # PAIRED (identical for photo and sketch)
+      load_size: 143                # resize to 143 then random-crop 128 (pix2pix jitter, scaled)
+      max_rotation: 0.0             # degrees; 0 = off
+  model:
+    out_channels: 1                 # sketches are generated as grayscale (see research notes)
+    g_channels: 64
+    d_channels: 64
+    style_dim: 16
+    dropout: 0.5                    # pix2pix value
+    norm: instance
+  loss:
+    lambda_l1: 100.0                # pix2pix value; tuned by Optuna
+  train:
+    epochs: 200
+    batch_size: 8
+    lr_g: 2.0e-4
+    lr_d: 2.0e-4
+    beta1: 0.5
+    amp: false                      # fp32 for GAN stability
+    sample_every: 10
+    decay_start_fraction: 0.5
+    early_stopping_patience: null   # GAN val L1 is noisy; train the full schedule
+  optuna:
+    study_name: task4_pix2pix
+    storage: sqlite:///optuna_studies/task4.db
+    n_trials: 20
+    epochs: 25                      # shorter schedule for trials (PDF p.8 allows this)
+    pruner: median
+    pruner_startup_trials: 4
+    pruner_warmup_steps: 8
+    seed: 42
+    search_space:
+      lr_g:        {type: float, low: 5.0e-5, high: 5.0e-4, log: true, target: train.lr_g}
+      lr_d:        {type: float, low: 5.0e-5, high: 5.0e-4, log: true, target: train.lr_d}
+      batch_size:  {type: categorical, choices: [4, 8, 16], target: train.batch_size}
+      base_channels: {type: categorical, choices: [32, 48, 64], target: [model.g_channels, model.d_channels]}
+      dropout:     {type: float, low: 0.0, high: 0.5, target: model.dropout}
+      style_dim:   {type: categorical, choices: [4, 8, 16, 32], target: model.style_dim}
+      lambda_l1:   {type: float, low: 10.0, high: 200.0, log: true, target: loss.lambda_l1}
+  tracking:
+    enabled: true
+    experiment: task4-face2sketch
+  output:
+    checkpoint: checkpoints/task4/generator.pt
+    dir: outputs/task4
+    optuna_dir: outputs/task4/optuna
+
+modes:
+  smoke:
+    progress: false
+    data: {limit_data: 16, num_workers: 0}
+    train: {epochs: 1, batch_size: 4, sample_every: 1}
+    optuna: {n_trials: 2, epochs: 1, study_name: task4_smoke, storage: sqlite:///optuna_studies/smoke.db,
+             search_space: {batch_size: {type: categorical, choices: [4], target: train.batch_size}}}
+    tracking: {experiment: smoke-tests}
+    output:
+      checkpoint: checkpoints/smoke/generator.pt
+      dir: outputs/smoke/task4
+      optuna_dir: outputs/smoke/task4/optuna
+  dev:
+    train: {epochs: 40}
+    optuna: {n_trials: 8, epochs: 10}
+  final:
+    train: {epochs: 200}
+    optuna: {n_trials: 20, epochs: 25}

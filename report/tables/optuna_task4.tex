@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Task 4 Optuna study \texttt{task4\_pix2pix\_final}: 22 trials (complete 18, running 2, pruned 2); 25 epochs per trial; best objective 0.3133 (trial 19).}
+\label{tab:optuna_task4}
+\small
+\begin{tabular}{llll}
+\toprule
+Parameter & Type & Search range & Best \\
+\midrule
+lr\_g & float & [5e-05, 0.0005] (log) & 0.000452 \\
+lr\_d & float & [5e-05, 0.0005] (log) & 7.378e-05 \\
+batch\_size & categorical & \{4, 8, 16\} & 8 \\
+base\_channels & categorical & \{32, 48, 64\} & 64 \\
+dropout & float & [0, 0.5] & 0.1172 \\
+style\_dim & categorical & \{4, 8, 16, 32\} & 16 \\
+lambda\_l1 & float & [10, 200] (log) & 148.7 \\
+\bottomrule
+\end{tabular}
+\end{table}

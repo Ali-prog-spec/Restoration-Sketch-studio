@@ -1,0 +1,30 @@
+# One command starts the complete application:
+#   docker compose up --build        ->  http://localhost:8080
+# Prerequisite: the ONNX models in ./models (see models/README.md — scripts/download_models.*).
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      MODEL_DIR: /app/models
+      MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-10}
+      ORT_THREADS: ${ORT_THREADS:-0}
+      CORS_ORIGINS: http://localhost:8080,http://localhost:5173
+    volumes:
+      - ${MODEL_PATH:-./models}:/app/models:ro
+    expose:
+      - "8000"
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"   # optional: direct API access / docs at /docs
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

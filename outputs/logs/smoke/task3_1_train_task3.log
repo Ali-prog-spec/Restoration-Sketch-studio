@@ -1,0 +1,4 @@
+[MoE] initial val J=0.3397 SSIM=0.4958 acc=0.250
+[MoE] warmup epoch 1/2 loss=0.2450 val_SSIM=0.5083 val_PSNR=14.38 J=0.3313 route_acc=0.250 usage=[0.28, 0.101, 0.397, 0.222] collapsed=False (0.3s)
+[MoE] joint epoch 2/2 loss=0.2712 val_SSIM=0.5174 val_PSNR=14.52 J=0.3253 route_acc=0.250 usage=[0.295, 0.069, 0.44, 0.197] collapsed=False (0.8s)
+initial (Task 2 weights): 0.3397  best: 0.3253

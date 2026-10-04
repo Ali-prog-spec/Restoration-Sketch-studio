@@ -1,0 +1,5 @@
+split,type,level,n,coverage_mean,coverage_min,coverage_max,prob_mean,sigma_mean
+val,blur,sampled,736,,,,,1.4935587746921752
+val,clean,sampled,736,,,,,
+val,occlusion,sampled,736,0.22413179148798404,0.10009765625,0.34942626953125,,
+val,salt_pepper,sampled,736,,,,0.08427658037868037,

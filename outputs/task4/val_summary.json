@@ -1,0 +1,17 @@
+{
+  "split": "val",
+  "overall": {
+    "l1": 0.10195931084688355,
+    "ssim": 0.4819094099151263,
+    "psnr": 15.525724536967727,
+    "n": 159.0
+  },
+  "style_influence": {
+    "1v2": 0.11641525477170944,
+    "1v3": 0.11362937092781067,
+    "2v3": 0.09479444473981857,
+    "note": "mean |G(x,a)-G(x,b)| in [0,1] units"
+  },
+  "checkpoint": "checkpoints/task4/generator.pt",
+  "epoch": 113
+}

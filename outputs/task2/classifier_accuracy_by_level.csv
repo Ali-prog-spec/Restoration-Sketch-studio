@@ -1,0 +1,11 @@
+type,level,correct
+clean,none,0.9915508312891796
+salt_pepper,low,1.0
+salt_pepper,medium,1.0
+salt_pepper,high,1.0
+blur,low,0.9741073862087762
+blur,medium,1.0
+blur,high,1.0
+occlusion,low,0.9779231398201145
+occlusion,medium,0.9980921231943308
+occlusion,high,1.0

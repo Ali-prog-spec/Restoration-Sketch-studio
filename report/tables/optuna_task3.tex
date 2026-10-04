@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Task 3 Optuna study \texttt{task3\_soft\_moe\_final}: 20 trials (complete 15, pruned 5); 0 epochs per trial; best objective 0.0817 (trial 18).}
+\label{tab:optuna_task3}
+\small
+\begin{tabular}{llll}
+\toprule
+Parameter & Type & Search range & Best \\
+\midrule
+lr\_joint & float & [1e-06, 5e-05] (log) & 1.353e-05 \\
+tau & float & [0.5, 3] & 2.077 \\
+ce\_weight & float & [0.01, 0.5] (log) & 0.01039 \\
+balance\_weight & float & [0.0001, 0.1] (log) & 0.0001863 \\
+recon\_l1 & float & [0.5, 0.95] & 0.5009 \\
+balance & categorical & \{squared, entropy\} & squared \\
+\bottomrule
+\end{tabular}
+\end{table}

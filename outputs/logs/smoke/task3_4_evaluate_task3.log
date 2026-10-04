@@ -1,0 +1,19 @@
+soft MoE:   0%|          | 0/8 [00:00<?, ?it/s]soft MoE:  12%|█▎        | 1/8 [00:00<00:04,  1.51it/s]soft MoE:  25%|██▌       | 2/8 [00:00<00:02,  2.62it/s]soft MoE:  38%|███▊      | 3/8 [00:01<00:01,  3.37it/s]soft MoE:  50%|█████     | 4/8 [00:01<00:00,  4.05it/s]soft MoE:  62%|██████▎   | 5/8 [00:01<00:00,  4.56it/s]soft MoE:  75%|███████▌  | 6/8 [00:01<00:00,  4.92it/s]soft MoE:  88%|████████▊ | 7/8 [00:01<00:00,  5.13it/s]soft MoE: 100%|██████████| 8/8 [00:01<00:00,  5.97it/s]                                                                        l1     psnr    ssim  input_l1  input_psnr  input_ssim  ssim_gain  psnr_gain    n
+clean        0.1715  14.4293  0.6059    0.0000    100.0000      1.0000    -0.3941   -85.5707   48
+salt_pepper  0.1798  13.8476  0.3689    0.0435     16.2567      0.3413     0.0275    -2.4090  144
+blur         0.1745  14.2470  0.5056    0.0223     29.3564      0.8521    -0.3465   -15.1094  144
+occlusion    0.1826  13.7079  0.5118    0.0873     14.6577      0.7148    -0.2030    -0.9499  144
+overall      0.1782  13.9837  0.4765    0.0459     28.0812      0.6725    -0.1960   -14.0976  480
+                    Identity  Salt expert  Blur expert  Occlusion expert
+type        level                                                       
+clean       none       0.294        0.068        0.441             0.196
+salt_pepper low        0.294        0.068        0.441             0.196
+            medium     0.294        0.068        0.441             0.197
+            high       0.294        0.068        0.441             0.196
+blur        low        0.294        0.068        0.441             0.196
+            medium     0.294        0.068        0.441             0.196
+            high       0.294        0.068        0.441             0.196
+occlusion   low        0.294        0.068        0.441             0.196
+            medium     0.294        0.068        0.441             0.197
+            high       0.294        0.068        0.441             0.197
+{'inactive_experts(max mean weight < 0.05)': [], 'unrelated_dominance(mean weight > 0.3 on another class)': [{'branch': 'Blur expert', 'true_class': 'clean', 'mean_weight': 0.44134951072434586}, {'branch': 'Blur expert', 'true_class': 'salt_pepper', 'mean_weight': 0.44089240704973537}, {'branch': 'Blur expert', 'true_class': 'occlusion', 'mean_weight': 0.44111792825990254}], 'correct_branch_mean_weight': {'clean': 0.29389139140645665, 'salt_pepper': 0.06846893475287491, 'blur': 0.441435046080086, 'occlusion': 0.19656671045555008}, 'routing_accuracy(argmax == true)': 0.3, 'mean_entropy_nats': 1.2241374922295412, 'max_entropy_nats': 1.3862943611198906, 'share_dominant(max w > 0.90)': 0.0, 'share_mixed(max w < 0.60)': 1.0, 'entropy_by_type': {'blur': 1.2240019225411944, 'clean': 1.2240563333034515, 'occlusion': 1.2241232221325238, 'salt_pepper': 1.2243143849902682}}

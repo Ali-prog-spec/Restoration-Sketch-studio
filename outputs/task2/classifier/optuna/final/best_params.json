@@ -1,0 +1,8 @@
+{
+  "lr": 0.0003754948960496151,
+  "batch_size": 32,
+  "base_channels": 16,
+  "channel_plan": "shallow",
+  "dropout": 0.1810582585265165,
+  "weight_decay": 0.0016377089208453601
+}

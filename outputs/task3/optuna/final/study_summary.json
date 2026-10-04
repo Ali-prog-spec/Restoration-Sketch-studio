@@ -1,0 +1,124 @@
+{
+  "study_name": "task3_soft_moe_final",
+  "direction": "MINIMIZE",
+  "n_trials_total": 20,
+  "trial_states": {
+    "COMPLETE": 15,
+    "PRUNED": 5
+  },
+  "search_space": {
+    "lr_joint": {
+      "type": "float",
+      "low": 1e-06,
+      "high": 5e-05,
+      "log": true,
+      "target": "train.lr_joint"
+    },
+    "tau": {
+      "type": "float",
+      "low": 0.5,
+      "high": 3.0,
+      "target": "model.tau"
+    },
+    "ce_weight": {
+      "type": "float",
+      "low": 0.01,
+      "high": 0.5,
+      "log": true,
+      "target": "loss.ce"
+    },
+    "balance_weight": {
+      "type": "float",
+      "low": 0.0001,
+      "high": 0.1,
+      "log": true,
+      "target": "loss.balance_weight"
+    },
+    "recon_l1": {
+      "type": "float",
+      "low": 0.5,
+      "high": 0.95,
+      "target": "loss.l1",
+      "complement_target": "loss.ssim"
+    },
+    "balance": {
+      "type": "categorical",
+      "choices": [
+        "squared",
+        "entropy"
+      ],
+      "target": "loss.balance"
+    }
+  },
+  "mode": "final",
+  "trial_epochs": 0,
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "packages": {
+      "torch": "2.14.0+cu126",
+      "torchvision": "0.29.0+cu126",
+      "numpy": "2.4.6",
+      "optuna": "5.0.0",
+      "mlflow": "3.16.1",
+      "onnx": "1.23.0",
+      "onnxruntime": "1.30.0",
+      "scikit-learn": "1.9.1",
+      "scikit-image": "0.26.0",
+      "pillow": "12.3.0",
+      "fastapi": "0.141.1"
+    },
+    "cuda_available": true,
+    "cuda_version": "12.6",
+    "cudnn_version": 91002,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_memory_gb": 6.0
+  },
+  "best_trial_number": 18,
+  "best_value": 0.08171311925853726,
+  "best_params": {
+    "lr_joint": 1.3528965487197334e-05,
+    "tau": 2.0770443259648013,
+    "ce_weight": 0.010388515794784236,
+    "balance_weight": 0.00018626833104855403,
+    "recon_l1": 0.5009323562711249,
+    "balance": "squared"
+  },
+  "best_user_attrs": {
+    "best_epoch": 5,
+    "collapse": "{'collapsed': False, 'inactive': [], 'dominating': [], 'usage': [0.41402841639785987, 0.2520419033914906, 0.1397587091999847, 0.19417096934605227]}",
+    "duration_s": 129.3,
+    "initial_objective": 0.09634149102899044,
+    "mean_weights": [
+      [
+        0.9481766340525254,
+        0.007474844597037072,
+        0.023077091060416853,
+        0.02127142173602529
+      ],
+      [
+        0.019495909507183926,
+        0.9742982646693354,
+        0.0015650529075292466,
+        0.004640775773188342
+      ],
+      [
+        0.40508194073386816,
+        0.022793792957521004,
+        0.5319369234468626,
+        0.04018733091652393
+      ],
+      [
+        0.28335918129786203,
+        0.003600711342068794,
+        0.002455769385130185,
+        0.7105843489584716
+      ]
+    ],
+    "val_entropy": 0.4502291808957639,
+    "val_psnr": 32.59179467740266,
+    "val_route_acc": 0.9188179347826086,
+    "val_ssim": 0.8650098119093024
+  }
+}

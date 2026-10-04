@@ -1,0 +1,11 @@
+type,level,misrouted_rate,mean_degradation_if_misrouted
+clean,none,0.008449168710820387,0.09945274018231899
+salt_pepper,low,0.0,
+salt_pepper,medium,0.0,
+salt_pepper,high,0.0,
+blur,low,0.025892613791223765,-0.09045486853359953
+blur,medium,0.0,
+blur,high,0.0,
+occlusion,low,0.022076860179885527,-0.06836851293752559
+occlusion,medium,0.0019078768056691197,-0.03168884411986385
+occlusion,high,0.0,

@@ -1,0 +1,32 @@
+{
+  "inactive_experts(max mean weight < 0.05)": [],
+  "unrelated_dominance(mean weight > 0.3 on another class)": [
+    {
+      "branch": "Identity",
+      "true_class": "blur",
+      "mean_weight": 0.39373499759376196
+    },
+    {
+      "branch": "Identity",
+      "true_class": "occlusion",
+      "mean_weight": 0.39132768825539954
+    }
+  ],
+  "correct_branch_mean_weight": {
+    "clean": 0.9218651961487494,
+    "salt_pepper": 0.9560817975845001,
+    "blur": 0.5437550403697593,
+    "occlusion": 0.604639283149143
+  },
+  "routing_accuracy(argmax == true)": 0.8376941946034342,
+  "mean_entropy_nats": 0.5362471473074304,
+  "max_entropy_nats": 1.3862943611198906,
+  "share_dominant(max w > 0.90)": 0.3463614063777596,
+  "share_mixed(max w < 0.60)": 0.21041155628236577,
+  "entropy_by_type": {
+    "blur": 0.8694233534565043,
+    "clean": 0.3258011338089558,
+    "occlusion": 0.6385434699760337,
+    "salt_pepper": 0.17092328965591144
+  }
+}
