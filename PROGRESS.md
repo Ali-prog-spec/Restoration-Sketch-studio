@@ -4,6 +4,22 @@ Status vocabulary: NOT STARTED · IMPLEMENTED · TESTED · EXPERIMENTALLY VERIFI
 
 _Last update: 2026-10-04 — FINAL pipeline complete. Full audit: [docs/final_compliance_checklist.md](docs/final_compliance_checklist.md)._
 
+## Who did what (details: [docs/AI_USE.md](docs/AI_USE.md))
+
+| Phase | Decided by the student | Implemented by Claude Code | Proposed by Claude Code, accepted by the student |
+|---|---|---|---|
+| 0 Requirements & research | requirements-first method, PDF as source of truth, no fabricated citations/results, status vocabulary | `REQUIREMENTS.md`, research notes, verified bibliography | – |
+| 1 Infrastructure | repo layout, seed 42, YAML configs, SMOKE/DEV/FINAL modes, CLI flags | configs, seed/config/MLflow utilities | Python 3.11 venv; MLflow (over W&B) |
+| 2 Data | official splits 80/20, runtime corruptions, deterministic manifests and their fields, required tests | data pipeline, manifests, sampler, tests | verified dataset mirror; union occlusion coverage; 4 conditions per val image; balanced batch sampler |
+| 3 Task 1 | genuine bottleneck, configurable limited skips, α only a baseline, Optuna variables, metrics, examples/failures from real outputs | autoencoder, training, Optuna study, evaluation, ONNX | selection objective J; bottleneck-shape search; bilinear decoder; skip ablation design |
+| 4 Task 2 | balanced batches, metrics set, shared search allowed, oracle vs predicted, automatic failure detection | classifier, specialists, routing evaluation, ONNX | avg+max pooling, AdamW; misrouting threshold |
+| 5 Task 3 | init from Task 2, warm-up then joint, PDF balance + one alternative, collapse pruning, routing analysis | soft MoE, joint training, routing analysis, ONNX | CE on untempered logits, frozen expert BN, entropy alternative, collapse thresholds |
+| 6 Task 4 | embedding in G and D, research conditioning, λ=100 baseline, paired augmentation, fixed val photos, metric separation | pix2pix, paired augmentation, GAN training, evaluation, ONNX | concatenation conditioning, InstanceNorm, 1-channel output, no FID |
+| 7–8 App | four workspaces + listed displays, FastAPI endpoints; **Google Stitch designs** | backend, frontend (restyled to the Stitch designs) | torch-free backend, base64 JSON responses |
+| 9 Docker & release | Docker deployment; **created GitHub repo, installed Docker, enabled virtualisation** | Dockerfiles, Compose, release upload | GitHub Releases for models |
+| 10–11 Report & audit | no invented numbers; **recorded the demo video; chose the LaTeX PDF for submission** | report text and figures from artifacts, final audit | – |
+| Experiments | **decided to run the full FINAL experiments on the own RTX 2060** | ran all studies, training and evaluation | – |
+
 ## Phase summary
 
 | Phase | Content | Status |
