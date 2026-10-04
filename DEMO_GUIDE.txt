@@ -1,0 +1,146 @@
+=====================================================================
+ DEMO VIDEO GUIDE (5-7 minutes) - where everything is and what to show
+ Project folder: C:\Users\KENKINIKI\Desktop\New folder (2)
+=====================================================================
+
+The PDF (p.2) requires the video to show: application startup, image
+uploading, runtime corruption, universal restoration, hard routing, soft
+expert weights, face-to-sketch generation, result downloading and
+experiment-tracking records. Everything below the line "PROOF FOLDERS" is
+optional extra evidence; show it briefly if time allows.
+
+---------------------------------------------------------------------
+ BEFORE RECORDING (not on video)
+---------------------------------------------------------------------
+- Start Docker Desktop (wait for "Engine running").
+- Have ready: one face photo (yours or a free stock photo), a webcam,
+  and these files/windows open in VS Code or Explorer:
+    outputs/RESULTS_SUMMARY.txt
+    outputs/onnx/validation_report.md
+- Optional: start MLflow in a terminal beforehand (see step 9).
+- Close the old dev servers if any are running (port 8000/8080 free).
+
+---------------------------------------------------------------------
+ SUGGESTED VIDEO ORDER (~6 min)
+---------------------------------------------------------------------
+ 1. (20 s) Show the GitHub repo page and the folder in VS Code.
+           https://github.com/Ali-prog-spec/Restoration-Sketch-studio
+
+ 2. (40 s) APPLICATION STARTUP - in a terminal:
+              cd "/c/Users/KENKINIKI/Desktop/New folder (2)"
+              docker compose up --build
+           Show both containers starting, then open http://localhost:8080
+           -> open "System status": all 7 ONNX models "Available".
+
+ 3. (60 s) TASK 1 - Universal Restoration
+           - "Upload custom": upload any pet photo  (= image uploading)
+           - Corruption: Salt & Pepper, severity High  (= runtime corruption)
+           - Run -> show input / restored / PSNR+SSIM / inference time
+           - Change to Occlusion Mask, run again.
+
+ 4. (60 s) TASK 2 - Hard-Routed Restoration
+           - Clean sample + Gaussian Blur Medium -> Run
+           - Point at the 4 classifier probabilities, "Predicted corruption",
+             "Selected expert", classifier/expert time.
+           - Corruption "None" on a clean sample -> identity bypass
+             (expert time 0, no expert run).
+
+ 5. (60 s) TASK 3 - Soft Mixture-of-Experts
+           - Same image with Salt & Pepper, then with mild Blur.
+           - Point at the 4 routing weights, the stacked bar, strongest /
+             second contributor, routing entropy (= soft expert weights).
+
+ 6. (60 s) TASK 4 - Face-to-Sketch Generator
+           - Upload a face photo, choose Style 1 -> Generate.
+           - Switch to Style 2 and Style 3 -> show the sketch changes.
+           - Webcam tab -> Start camera -> Snap frame -> Generate.
+           - Click "Download PNG" and show the downloaded file
+             (= result downloading).
+
+ 7. (40 s) RESULTS - open outputs/RESULTS_SUMMARY.txt:
+           classifier accuracy 99.42 %, SSIM 0.672 -> 0.786 / 0.802 / 0.838,
+           FS2K test L1 0.111. Optionally show report/figures/
+           task2_confusion_matrix.png and task3_routing_heatmap.png.
+
+ 8. (20 s) ONNX proof - open outputs/onnx/validation_report.md
+           (all models PASS, max difference < 1e-5).
+
+ 9. (40 s) EXPERIMENT TRACKING (required) - in a second terminal:
+              cd "/c/Users/KENKINIKI/Desktop/New folder (2)"
+              .venv/Scripts/mlflow ui --backend-store-uri sqlite:///mlflow.db
+           open http://127.0.0.1:5000 -> show the experiments
+           (task1-universal-dae, task2-classifier, task2-specialists,
+           task3-soft-moe, task4-face2sketch), click one run -> show its
+           parameters, the metric charts (loss curves) and artifacts.
+           Optionally show an Optuna plot:
+           outputs/task1/optuna/final/optimization_history.png
+
+10. (10 s) Stop: Ctrl+C, docker compose down.
+
+=====================================================================
+ PROOF FOLDERS (what lives where)
+=====================================================================
+
+DATASETS (downloaded locally, NOT on GitHub - too large)
+  data/raw/oxford_pets/images/            7,349 Oxford-IIIT Pet images
+  data/raw/oxford_pets/annotations/       official trainval.txt / test.txt
+  data/raw/FS2K/photo/ , data/raw/FS2K/sketch/   FS2K photos and sketches
+  data/raw/FS2K/anno_train.json, anno_test.json  official FS2K split + styles
+  data/processed/                         128x128 cache of the clean images
+
+SPLITS + DETERMINISTIC CORRUPTIONS (on GitHub)
+  data/manifests/oxford_split.json        2944 / 736 / 3669 split (seed 42)
+  data/manifests/oxford_test_manifest.json   36,690 fixed test corruptions
+  data/manifests/oxford_val_manifest.json    fixed validation corruptions
+  data/manifests/fs2k_split.json          899 / 159 / 1046 (stratified by style)
+  data/manifests/oxford_source_verification.json   mirror == official check
+
+TRAINED WEIGHTS
+  checkpoints/task1/universal_dae.pt      Task 1 PyTorch weights
+  checkpoints/task1/universal_dae_skip0.pt   limited-skip ablation
+  checkpoints/task2/classifier.pt         Task 2 classifier
+  checkpoints/task2/{salt_pepper,blur,occlusion}_expert.pt   3 specialists
+  checkpoints/task3/soft_moe.pt           Task 3 soft MoE
+  checkpoints/task4/generator.pt          Task 4 generator (+ discriminator inside)
+  models/*.onnx  + models/model_card.json  the 7 deployed ONNX models
+  dist/models.zip                         ONNX models packaged for GitHub Release
+
+TEST RESULTS (accuracy, SSIM, PSNR ...)
+  outputs/RESULTS_SUMMARY.txt             <- ALL headline numbers in one file
+  outputs/task1/metrics_by_type.csv, metrics_by_level.csv
+  outputs/task2/test_summary.json         classifier accuracy / F1, routing
+  outputs/task2/classifier_per_class.csv, classifier_confusion_normalized.csv
+  outputs/task2/oracle_vs_predicted_by_level.csv
+  outputs/task3/metrics_by_type.csv, routing_mean_weights_by_level.csv,
+                routing_diagnostics.json
+  outputs/task4/test_metrics_by_style.csv, test_summary.json
+
+FIGURES (all used in the report)
+  report/figures/                         51 figures (examples, failure cases,
+                                          confusion matrix, routing heatmap,
+                                          GAN progression, app screenshots)
+  outputs/task4/progress/                 GAN samples on fixed photos per epoch
+
+HYPERPARAMETER SEARCH (Optuna)
+  optuna_studies/*.db                     the 5 Optuna studies (SQLite)
+  outputs/<task>/optuna/final/            trials.csv, best_params.json,
+                                          optimization_history.png,
+                                          param_importances.png
+
+EXPERIMENT TRACKING (MLflow)
+  mlflow.db                               all runs (params, metrics)
+  mlartifacts/                            logged figures and checkpoints
+
+ONNX CHECK
+  outputs/onnx/validation_report.md       PyTorch vs ONNX Runtime, all PASS
+
+TRAINING LOGS
+  outputs/logs/final/                     full console log of every training run
+
+REPORT
+  report/main.tex  (+ report/main.pdf)    IEEE report
+  dist/report_overleaf.zip                upload to Overleaf
+
+REQUIREMENTS / AUDIT
+  REQUIREMENTS.md                         every PDF requirement with page number
+  docs/final_compliance_checklist.md      requirement -> evidence -> status
