@@ -17,7 +17,7 @@ _Last update: 2026-10-04 — FINAL pipeline complete. Full audit: [docs/final_co
 | 6 | Task 4 style-conditioned pix2pix on FS2K | EXPERIMENTALLY VERIFIED |
 | 7 | FastAPI backend | TESTED + browser-verified with real models |
 | 8 | React + Tailwind UI (restyled to the student's Google Stitch design) | TESTED + browser-verified |
-| 9 | Docker / Compose | IMPLEMENTED — NOT TESTED (Docker not installed) |
+| 9 | Docker / Compose | TESTED (built and run with Docker Desktop) |
 | 10 | Report artifacts (51 figures, 17 LaTeX tables) + IEEE skeleton | IMPLEMENTED — text and compilation MANUAL |
 | 11 | Final PDF compliance audit | DONE |
 
@@ -53,8 +53,8 @@ _Last update: 2026-10-04 — FINAL pipeline complete. Full audit: [docs/final_co
 
 ## Manual steps for the student (required before submission)
 1. Google Stitch: add a **Stitch prompt/project screenshot** (`report/stitch/stitch_prompt.png`). (All 4 workspace designs are in.)
-2. Install Docker Desktop, run `docker compose up --build`, check http://localhost:8080.
-3. Create the GitHub repo, push, create release `v1.0` with `dist/models.zip` (`python scripts/package_models.py`), replace `YOUR_GITHUB_USER/YOUR_REPO` placeholders.
+2. ~~Docker~~ done.
+3. ~~GitHub repo + release v1.0~~ done.
 4. Write the report interpretation (all red TODOs), compile on Overleaf, add repo URL.
 5. Record the 5–7 min demo video (checklist in README), upload to YouTube, put the link in the report.
 6. Edit `docs/AI_USE.md` to reflect actual AI usage; copy it into the report appendix.

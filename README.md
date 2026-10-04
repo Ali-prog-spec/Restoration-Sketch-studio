@@ -28,7 +28,7 @@ Prerequisites: Git and Docker Desktop (with Docker Compose v2). No Python, Node 
 ```bash
 git clone https://github.com/Ali-prog-spec/Restoration-Sketch-studio.git
 cd Restoration-Sketch-studio
-# 1) obtain the trained ONNX models (GitHub Release asset, ~<size> MB)
+# 1) obtain the trained ONNX models (GitHub Release v1.0, models.zip 171 MB)
 sh scripts/download_models.sh                # Windows: powershell -File scripts\download_models.ps1
 # 2) start everything
 docker compose up --build

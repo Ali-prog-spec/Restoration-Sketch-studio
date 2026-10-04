@@ -25,7 +25,7 @@ def main():
         for f in files:
             z.write(f, f.name)
     digest = hashlib.sha256(zpath.read_bytes()).hexdigest()
-    (dist / "models.sha256").write_text(f"{digest}  models.zip\n")
+    (dist / "models.sha256").write_bytes(f"{digest}  models.zip\n".encode())  # LF only, for `sha256sum -c`
     print(f"{zpath} ({zpath.stat().st_size / 1e6:.1f} MB) sha256={digest}")
 
 

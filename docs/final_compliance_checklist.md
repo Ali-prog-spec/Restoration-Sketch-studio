@@ -15,10 +15,11 @@ Requirement IDs refer to `REQUIREMENTS.md`.
 | MLflow tracking | EXPERIMENTALLY VERIFIED (local `mlflow.db`) |
 | ONNX export of all 7 deployed models + numerical check | EXPERIMENTALLY VERIFIED (all PASS, max diff ≤ 8.1e-6) |
 | FastAPI backend + React/Tailwind frontend | TESTED (67 tests) + verified in a browser with the real models |
-| Docker / Docker Compose | **IMPLEMENTED — NOT TESTED** (Docker not installed on the dev machine) |
+| Docker / Docker Compose | TESTED (`docker compose up --build`, app verified at localhost:8080) |
 | Google Stitch evidence | PARTLY DONE (all 4 workspaces + System status + logo; Stitch prompt/project screenshot missing) |
 | IEEE LaTeX report | IMPLEMENTED skeleton + generated tables/figures; **interpretation text and compilation: MANUAL** |
-| GitHub repo, model release, YouTube demo, AI-use appendix | **MANUAL ACTION REQUIRED** |
+| GitHub repo + model release | DONE |
+| YouTube demo link, author details, AI-use appendix review | **MANUAL ACTION REQUIRED** |
 
 **The assignment is NOT complete yet**: the manual items below must be done by the student before submission.
 
@@ -107,7 +108,7 @@ Requirement IDs refer to `REQUIREMENTS.md`.
 | H1–H2 | MLflow: params, losses, metrics, checkpoints, visuals | `mlflow.db` + `mlartifacts/` (`mlflow ui --backend-store-uri sqlite:///mlflow.db`) | EXPERIMENTALLY VERIFIED |
 | H3 | Tracking records shown in the video | — | MANUAL |
 | J1–J2 | All inference models in ONNX, consistency verified | `outputs/onnx/validation_report.md` (8 outputs, all PASS) | EXPERIMENTALLY VERIFIED |
-| J3 | ONNX files included or downloadable | `scripts/package_models.py`, `scripts/download_models.*` | **MANUAL: create GitHub release, replace placeholder URL** |
+| J3 | ONNX files included or downloadable | GitHub Release v1.0 (`models.zip` + `models.sha256`); download + checksum + unzip verified | DONE |
 
 ## K–L. Application and deployment
 
@@ -115,17 +116,17 @@ Requirement IDs refer to `REQUIREMENTS.md`.
 |---|---|---|---|
 | K1, K4–K10 | One React/Tailwind app, FastAPI backend, validation, ONNX inference, timing, required operations | `frontend/`, `backend/`, `tests/test_api.py` | TESTED |
 | K2–K3 | Design first developed in Google Stitch; evidence in report | `report/stitch/` (Tasks 1–4, System status, logo); report section with honest note on Stitch placeholder content | PARTLY DONE — **Stitch prompt/project screenshot MANUAL** |
-| L1–L3 | Docker containers, one-command Compose, clone → models → up → browser | `backend/Dockerfile`, `frontend/Dockerfile`, `docker-compose.yml` | **IMPLEMENTED — NOT TESTED: install Docker Desktop and run `docker compose up --build`** |
+| L1–L3 | Docker containers, one-command Compose, clone → models → up → browser | `backend/Dockerfile`, `frontend/Dockerfile`, `docker-compose.yml` | TESTED (both containers built and ran; all 7 models loaded) |
 
 ## M–P. Report, demo, repository, AI use
 
 | Req | Requirement | Evidence | Status |
 |---|---|---|---|
 | M1–M3, M6–M8 | IEEE LaTeX report with all sections, diagrams, curves, tables, screenshots | `report/main.tex`, `report/figures/` (51 files), `report/tables/` (17 tables) | IMPLEMENTED — **interpretation text (red TODOs) MANUAL; compile on Overleaf** |
-| M4 | Repository URL in report | — | MANUAL |
+| M4 | Repository URL in report | `report/main.tex` author block | DONE |
 | M5, N1–N2 | 5–7 min YouTube demo, link in report | demo checklist in `README.md` | MANUAL |
 | M9–M10 | Interpretation of every figure/table; alternatives and difficulties | research notes + PROGRESS problem log as source material | MANUAL |
-| O1 | GitHub repository | — | MANUAL |
+| O1 | GitHub repository | https://github.com/Ali-prog-spec/Restoration-Sketch-studio | DONE |
 | O2 | Repo contents (code, configs, deps, data prep, train/eval, Optuna studies, ONNX code, app, Dockerfiles, Compose, README) | all present | DONE |
 | O3 | No datasets / large models in Git | `.gitignore` (data, checkpoints, `*.onnx`) | DONE |
 | P1–P2 | AI-use appendix | `docs/AI_USE.md` draft | **MANUAL: student must edit to reflect actual use** |
