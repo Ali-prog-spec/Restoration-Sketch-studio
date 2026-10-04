@@ -3,6 +3,7 @@
 \caption{Task 4 Optuna study \texttt{task4\_pix2pix\_final}: 22 trials (complete 18, running 2, pruned 2); 25 epochs per trial; best objective 0.3133 (trial 19).}
 \label{tab:optuna_task4}
 \small
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{llll}
 \toprule
 Parameter & Type & Search range & Best \\
@@ -15,5 +16,5 @@ dropout & float & [0, 0.5] & 0.1172 \\
 style\_dim & categorical & \{4, 8, 16, 32\} & 16 \\
 lambda\_l1 & float & [10, 200] (log) & 148.7 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}

@@ -59,8 +59,8 @@ def optuna_table(study_dir: str, task: str, label: str, missing: list):
            f"{s.get('trial_epochs', '?')} epochs per trial; best objective "
            f"{s.get('best_value', float('nan')):.4f} (trial {s.get('best_trial_number', '--')}).")
     tex = ("\\begin{table}[t]\n\\centering\n\\caption{" + cap + "}\n\\label{" + label + "}\n\\small\n"
-           "\\begin{tabular}{llll}\n\\toprule\nParameter & Type & Search range & Best \\\\\n\\midrule\n"
-           + body + "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
+           "\\resizebox{\\columnwidth}{!}{%\n\\begin{tabular}{llll}\n\\toprule\nParameter & Type & Search range & Best \\\\\n\\midrule\n"
+           + body + "\n\\bottomrule\n\\end{tabular}}\n\\end{table}\n")
     TAB.mkdir(parents=True, exist_ok=True)
     (TAB / f"{label.replace('tab:', '')}.tex").write_text(tex, encoding="utf-8")
 

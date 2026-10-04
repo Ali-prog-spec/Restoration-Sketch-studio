@@ -28,7 +28,7 @@ def latex_table(df: pd.DataFrame, path, caption: str, label: str, cols=None, fmt
     cols = cols or list(df.columns)
     fmt = fmt or {}
     lines = ["\\begin{table}[t]", "\\centering", f"\\caption{{{caption}}}", f"\\label{{{label}}}",
-             "\\small", "\\begin{tabular}{l" + "r" * len(cols) + "}", "\\toprule"]
+             "\\small", "\\resizebox{\\columnwidth}{!}{%", "\\begin{tabular}{l" + "r" * len(cols) + "}", "\\toprule"]
     head = index_names or "Condition"
     lines.append(head + " & " + " & ".join(c.replace("_", "\\_") for c in cols) + " \\\\")
     lines.append("\\midrule")
@@ -39,7 +39,7 @@ def latex_table(df: pd.DataFrame, path, caption: str, label: str, cols=None, fmt
             v = row[c]
             cells.append(fmt.get(c, "{:.4f}").format(v) if isinstance(v, (float, int)) and not isinstance(v, bool) else str(v))
         lines.append(name.replace("_", "\\_") + " & " + " & ".join(cells) + " \\\\")
-    lines += ["\\bottomrule", "\\end{tabular}", "\\end{table}"]
+    lines += ["\\bottomrule", "\\end{tabular}}", "\\end{table}"]
     p = resolve(path)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text("\n".join(lines), encoding="utf-8")

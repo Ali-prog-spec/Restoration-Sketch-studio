@@ -3,6 +3,7 @@
 \caption{Task 2 classifier Optuna study \texttt{task2\_classifier\_final}: 25 trials (pruned 20, complete 5); 10 epochs per trial; best objective 0.0054 (trial 22).}
 \label{tab:optuna_task2_cls}
 \small
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{llll}
 \toprule
 Parameter & Type & Search range & Best \\
@@ -14,5 +15,5 @@ channel\_plan & categorical & \{shallow, standard, wide\_top\} & shallow \\
 dropout & float & [0, 0.5] & 0.1811 \\
 weight\_decay & float & [1e-06, 0.01] (log) & 0.001638 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}

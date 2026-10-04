@@ -3,6 +3,7 @@
 \caption{Task 3 Optuna study \texttt{task3\_soft\_moe\_final}: 20 trials (complete 15, pruned 5); 0 epochs per trial; best objective 0.0817 (trial 18).}
 \label{tab:optuna_task3}
 \small
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{llll}
 \toprule
 Parameter & Type & Search range & Best \\
@@ -14,5 +15,5 @@ balance\_weight & float & [0.0001, 0.1] (log) & 0.0001863 \\
 recon\_l1 & float & [0.5, 0.95] & 0.5009 \\
 balance & categorical & \{squared, entropy\} & squared \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}

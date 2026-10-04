@@ -91,7 +91,8 @@ def severity_plot(by_level: pd.DataFrame, out, metric="ssim", title=""):
     """Grouped bars: input vs output metric for each corruption and severity."""
     df = by_level.reset_index()
     df = df[df["type"] != "clean"]
-    labels = [f"{CLASS_DISPLAY[t].split()[0]}\n{lv}" for t, lv in zip(df["type"], df["level"])]
+    short = {"salt_pepper": "Salt", "blur": "Blur", "occlusion": "Occl."}
+    labels = [f"{short.get(t, t)}\n{lv}" for t, lv in zip(df["type"], df["level"])]
     x = np.arange(len(df))
     fig, ax = plt.subplots(figsize=(6.5, 2.6))
     ax.bar(x - 0.2, df[f"input_{metric}"], 0.4, label="corrupted input", color="#bbbbbb")
