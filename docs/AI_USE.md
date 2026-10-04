@@ -32,4 +32,3 @@ what they were used for, and how their output was tested or corrected.
 - Initial Task 1 search space only varied latent channels at 8×8 → replaced by a bottleneck-shape search (12×–48× compression) after the first real trial showed low SSIM.
 - Smoke-test LaTeX tables were written into `report/` → routed non-final outputs elsewhere.
 
-*Student: add any change you made yourself, and describe how you checked that you understand each component (you may be asked to modify it during the evaluation).*
